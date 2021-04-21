@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "86448502572",
+    "project_id": "corporationmeetapp",
+    "storage_bucket": "corporationmeetapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86448502572:android:e4e1811094cf6919769e89",
+        "android_client_info": {
+          "package_name": "com.example.newmeetapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "86448502572-8uem9o3pto49vt8ke5f50nnp2duvd8l1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOuTg1D0mnERvJtncE6PhF3VYzNauqENg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "86448502572-8uem9o3pto49vt8ke5f50nnp2duvd8l1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
