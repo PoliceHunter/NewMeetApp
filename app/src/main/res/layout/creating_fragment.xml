@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.creating.Creating">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ConstLayout_creating"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#31FFFFFF">
+
+<!--Название события-->
+        <TextView
+            android:id="@+id/textViewEventName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/EventName"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEventName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="10dp"
+            app:boxStrokeColor="@color/blue_inCreating"
+            app:errorEnabled="true"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEventName"
+            app:layout_constraintStart_toStartOf="@+id/textViewEventName"
+            app:layout_constraintTop_toBottomOf="@+id/textViewEventName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditTextEventName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hintEventName_cinema" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+<!-- Категория события-->
+        <TextView
+            android:id="@+id/textViewEventCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/EventCategoryTitle"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEventName"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textViewEventName"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEventName"/>
+
+
+            <RadioGroup
+                android:id="@+id/radioGroupEventCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@+id/textViewEventCategory"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/textViewEventCategory"
+                app:layout_constraintTop_toBottomOf="@+id/textViewEventCategory">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout_Radio_EventCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/RadioBtCategory_Walk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_selector"
+                        android:button="@android:color/transparent"
+                        android:layout_marginEnd="@dimen/text_margin"
+                        android:text="Прогулка"
+                        android:textAlignment="center"
+                        android:textColor="@drawable/radio_text_event_time" />
+
+                    <RadioButton
+                        android:id="@+id/RadioBtCategory_Active"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_selector"
+                        android:button="@android:color/transparent"
+                        android:layout_marginEnd="@dimen/text_margin"
+                        android:text="Активный отдых"
+                        android:textAlignment="center"
+                        android:textColor="@drawable/radio_text_event_time" />
+
+                    <RadioButton
+                        android:id="@+id/RadioBtCategory_Food"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_selector"
+                        android:button="@android:color/transparent"
+                        android:text="Еда"
+                        android:textAlignment="center"
+                        android:textColor="@drawable/radio_text_event_time" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearLayout_Radio_EventCategory2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/RadioBtCategory_Culture"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_selector"
+                        android:button="@android:color/transparent"
+                        android:layout_marginEnd="@dimen/text_margin"
+                        android:text="Культура"
+                        android:textAlignment="center"
+                        android:textColor="@drawable/radio_text_event_time" />
+                    <RadioButton
+                        android:id="@+id/RadioBtCategory_Travel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_selector"
+                        android:button="@android:color/transparent"
+                        android:layout_marginEnd="@dimen/text_margin"
+                        android:text="Путешествия"
+                        android:textAlignment="center"
+                        android:textColor="@drawable/radio_text_event_time" />
+                    <RadioButton
+                        android:id="@+id/RadioBtCategory_Concerts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_selector"
+                        android:button="@android:color/transparent"
+                        android:text="Концерты"
+                        android:textAlignment="center"
+                        android:textColor="@drawable/radio_text_event_time" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearLayout_Radio_EventCategory3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
+
+
+                    <RadioButton
+                        android:id="@+id/RadioBtCategory_Study"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_selector"
+                        android:button="@android:color/transparent"
+                        android:layout_marginEnd="@dimen/text_margin"
+                        android:text="Образование"
+                        android:textAlignment="center"
+                        android:textColor="@drawable/radio_text_event_time" />
+
+                    <RadioButton
+                        android:id="@+id/RadioBtCategory_Other"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/radio_selector"
+                        android:button="@android:color/transparent"
+                        android:text="Другое"
+                        android:textAlignment="center"
+                        android:textColor="@drawable/radio_text_event_time" />
+                </LinearLayout>
+
+
+
+            </RadioGroup>
+
+<!-- Место события-->
+        <TextView
+            android:id="@+id/textViewEventRegion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/EventPlaceTitle"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEventCategory"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textViewEventCategory"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroupEventCategory" />
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/textInputLayoutEventPlace"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="10dp"
+            app:boxStrokeColor="@color/blue_inCreating"
+            app:errorEnabled="true"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEventRegion"
+            app:layout_constraintStart_toStartOf="@+id/textViewEventRegion"
+            app:layout_constraintTop_toBottomOf="@+id/textViewEventRegion">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="6dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginLeft="6dp">
+
+                <fragment
+                    android:id="@+id/autocomplete_fragment"
+                    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+<!-- Дата события-->
+        <TextView
+            android:id="@+id/textViewEventDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/EventDateTitle"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEventRegion"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textViewEventRegion"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEventPlace" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEventDate"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="10dp"
+            app:boxStrokeColor="@color/blue_inCreating"
+            app:errorEnabled="true"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEventDate"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/textViewEventDate"
+            app:layout_constraintTop_toBottomOf="@+id/textViewEventDate">
+
+            <EditText
+                android:id="@+id/eventDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="10.04.2021 (Сделать DatePicker, чтобы дата была в нужном формате + проверка на то, что дата не в прошлом/ Либо просто сделать проверку на введенный формат и то, что не в прошлом)"
+                android:inputType="date" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+<!-- Время события-->
+        <TextView
+            android:id="@+id/textViewEventTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/EventTimeTitle"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEventDate"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textViewEventDate"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEventDate" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout_Radio_EventTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEventTime"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/textViewEventTime"
+            app:layout_constraintTop_toBottomOf="@+id/textViewEventTime">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/RadioBtTimeMorning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
+                    android:text="@string/Morning"
+                    android:textAlignment="center"
+                    android:textColor="@drawable/radio_text_event_time" />
+
+                <RadioButton
+                    android:id="@+id/RadioBtTimeDay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
+                    android:text="@string/Day"
+                    android:textAlignment="center"
+                    android:textColor="@drawable/radio_text_event_time" />
+
+                <RadioButton
+                    android:id="@+id/RadioBtTimeEvening"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
+                    android:text="@string/Evening"
+                    android:textAlignment="center"
+                    android:textColor="@drawable/radio_text_event_time" />
+
+                <RadioButton
+                    android:id="@+id/RadioBtTimeNight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
+                    android:text="@string/Night"
+                    android:textAlignment="center"
+                    android:textColor="@drawable/radio_text_event_time" />
+
+                <RadioButton
+                    android:id="@+id/RadioBtTimeAny"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
+                    android:checked="true"
+                    android:text="@string/TimeAny"
+                    android:textAlignment="center"
+                    android:textColor="@drawable/radio_text_event_time" />
+            </RadioGroup>
+        </LinearLayout>
+
+<!-- Количество участников-->
+        <!--        <TextView-->
+        <!--            android:id="@+id/textViewEventParticipantsCount"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="16dp"-->
+        <!--            android:text="Указать количество участников"-->
+        <!--            android:textSize="16sp"-->
+        <!--            app:layout_constraintEnd_toEndOf="@+id/textViewEventTime"-->
+        <!--            app:layout_constraintHorizontal_bias="0.0"-->
+        <!--            app:layout_constraintStart_toStartOf="@+id/textViewEventTime"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/linearLayout_Radio_EventTime" />-->
+
+        <LinearLayout
+            android:id="@+id/linearLayout_EventParticipantsCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="54dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEventTime"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/textViewEventTime"
+            app:layout_constraintTop_toBottomOf="@+id/textViewEventTime">
+
+        <Switch
+            android:id="@+id/switchEventParticipantsCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:backgroundTint="#FFFFFF"
+            android:text="@string/EventParticipantsCountTitle"
+            android:textColor="@color/gray_text"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEventTime"
+            app:layout_constraintHorizontal_bias="0.082"
+            app:layout_constraintStart_toStartOf="@+id/textViewEventTime"
+            app:layout_constraintTop_toBottomOf="@+id/textViewEventTime"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutEventParticipantsCount"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="6dp"
+                android:visibility="invisible"
+                app:boxStrokeColor="@color/blue_inCreating"
+                app:errorEnabled="true"
+                app:hintEnabled="false"
+                app:layout_constraintCircleRadius="6dp"
+                app:layout_constraintStart_toEndOf="@+id/switchEventParticipantsCount"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout_Radio_EventTime">
+
+                <!--вот тут добавить visibility gone, а в коде изменить видимость, если switch включен-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditTextEventParticipantsCount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="1"
+                    android:inputType="number"
+                    android:padding="0dp"
+                    android:textSize="12sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+<!-- Пол участников-->
+        <TextView
+            android:id="@+id/textViewEventGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="0dp"
+            android:text="@string/GenderTitle"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEventTime"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textViewEventTime"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout_EventParticipantsCount" />
+        <LinearLayout
+            android:id="@+id/linearLayout_Radio_Gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEventGender"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/textViewEventGender"
+            app:layout_constraintTop_toBottomOf="@+id/textViewEventGender">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/RadioBtGenderMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
+                    android:paddingHorizontal="@dimen/text_margin"
+                    android:text="@string/GenderMale"
+                    android:textAlignment="center"
+                    android:textColor="@drawable/radio_text_event_time" />
+
+                <RadioButton
+                    android:id="@+id/RadioBtGenderFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
+                    android:paddingHorizontal="@dimen/text_margin"
+                    android:text="@string/GenderFemale"
+                    android:textAlignment="center"
+                    android:textColor="@drawable/radio_text_event_time" />
+
+                <RadioButton
+                    android:id="@+id/RadioBtGenderAny"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="@dimen/text_margin"
+                    android:text="@string/GenderAny"
+                    android:textAlignment="center"
+                    android:textColor="@drawable/radio_text_event_time"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
+                    android:checked="true"/>
+
+            </RadioGroup>
+        </LinearLayout>
+
+<!-- Описание события-->
+        <TextView
+            android:id="@+id/textViewEventDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/EventDetails"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEventGender"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textViewEventGender"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout_Radio_Gender" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEventDetails"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="10dp"
+            app:boxStrokeColor="@color/blue_inCreating"
+            app:errorEnabled="true"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEventDetails"
+            app:layout_constraintStart_toStartOf="@+id/textViewEventDetails"
+            app:layout_constraintTop_toBottomOf="@+id/textViewEventDetails">
+
+            <EditText
+                android:id="@+id/editText_eventDetails"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:hint="Здесь можно/нужно оставить более подробную информацию о событии"
+                android:inputType="textMultiLine" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout_ButtonNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEventDetails"
+            android:gravity="center">
+        <Button
+            android:id="@+id/bt_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Далее"
+            android:background="@drawable/button_next">
+
+        </Button>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout_ButtonNext"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout_ButtonNext"
+            android:layout_marginTop="10dp">
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

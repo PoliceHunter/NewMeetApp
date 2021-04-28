@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_search">
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.example.newmeetapp.ui.events.eventFragment"
+        android:label="Поиск событий"
+        tools:layout="@layout/fragment_event_list" />
+
+    <fragment
+        android:id="@+id/navigation_mapsFragment"
+        android:name="com.example.newmeetapp.ui.map.MapsFragment"
+        android:label="Карта событий"
+        tools:layout="@layout/fragment_maps" />
+
+    <fragment
+        android:id="@+id/navigation_creating"
+        android:name="com.example.newmeetapp.ui.creating.Creating"
+        android:label="Создание событий"
+        tools:layout="@layout/creating_fragment" />
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.example.newmeetapp.ui.notifications.NotificationsFragment"
+        android:label="Уведомления"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.newmeetapp.ui.profile.Profile"
+        android:label="@string/title_profile"
+        tools:layout="@layout/profile_fragment" />
+
+
+
+</navigation>

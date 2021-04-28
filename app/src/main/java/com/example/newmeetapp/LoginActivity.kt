@@ -7,10 +7,8 @@ import android.text.TextUtils
 import android.util.Log
 import android.util.Patterns
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -33,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
                 auth.signInWithEmailAndPassword(emailLoginInput.text.toString(), passwordLoginInput.text.toString())
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
-                            startActivity(Intent(this@LoginActivity, ProfileActivity::class.java))
+                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                             finish()
                         } else {
                             Log.w("createUserWithEmail:failure", it.exception)

@@ -1,76 +1,45 @@
-package com.example.newmeetapp
+package com.example.newmeetapp.ui.map
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
-import com.google.android.gms.common.api.Status
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.example.newmeetapp.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.libraries.places.api.Places
-import com.google.android.libraries.places.api.model.Place
-import com.google.android.libraries.places.widget.Autocomplete
-import com.google.android.libraries.places.widget.AutocompleteActivity
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_registration.*
-import kotlin.reflect.typeOf
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
+class MapsFragment : Fragment() {
 
     private lateinit var mMap: GoogleMap
     private lateinit var databaseReference: DatabaseReference
     var database: FirebaseDatabase? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_maps)
+    private val callback = OnMapReadyCallback { googleMap ->
+        /**
+         * Manipulates the map once available.
+         * This callback is triggered when the map is ready to be used.
+         * This is where we can add markers or lines, add listeners or move the camera.
+         * In this case, we just add a marker near Sydney, Australia.
+         * If Google Play services is not installed on the device, the user will be prompted to
+         * install it inside the SupportMapFragment. This method will only be triggered once the
+         * user has installed Google Play services and returned to the app.
+         */
 
         // DataBase initailization
         database = FirebaseDatabase.getInstance()
         databaseReference = database?.reference!!.child("places")
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-                .findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
 
-    }
-
-
-//    private fun addMarker(place: Place)
-//    {
-//        mMap.addMarker(
-//                place.latLng?.let {
-//                    MarkerOptions()
-//                            .position(it)
-//                            .title("${place.name}")
-//                })
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(place.latLng))
-//    }
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-    override fun onMapReady(googleMap: GoogleMap)
-    {
         //val user = auth.currentUser
         mMap = googleMap
 
@@ -94,8 +63,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     mMap = googleMap
                     mMap.addMarker(
                         MarkerOptions()
-                        .position(etPlaceLatLng)
-                        .title(etPlaceName))
+                            .position(etPlaceLatLng)
+                            .title(etPlaceName))
                 }
             }
 
@@ -112,4 +81,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.maxZoomLevel
         mMap.moveCamera(CameraUpdateFactory.newLatLng(moscow))
     }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_maps, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment?.getMapAsync(callback)
+
+    }
+
 }

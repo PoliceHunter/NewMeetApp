@@ -1,8 +1,30 @@
 <resources>
-    <string name="app_name">newmeetapp</string>
+    <string name="app_name">Bottom Menu App</string>
+    <string name="title_search">Поиск событий</string>
+    <string name="title_map">Карта событий</string>
+    <string name="title_eventCreating">Создание событий</string>
+    <string name="title_notifications">Уведомления</string>
+    <string name="title_profile">Профиль</string>
+    <string name="EventName">Название события</string>
+    <string name="EventDateTitle">Дата</string>
+    <string name="EventPlaceTitle">Место</string>
+    <string name="EventTimeTitle">Время</string>
+    <string name="hintEventName_cinema">Пойти в кино</string>
+    <string name="Morning">Утро</string>
+    <string name="Day">День</string>
+    <string name="Evening">Вечер</string>
+    <string name="Night">Ночь</string>
+    <string name="EventParticipantsCountTitle">Количество участников</string>
+    <string name="GenderTitle">Пол участников</string>
+    <string name="GenderMale">Мужской</string>
+    <string name="GenderFemale">Женский</string>
+    <string name="GenderAny">Любой</string>
+    <string name="EventDetails">Детали события</string>
+    <string name="EventCategoryTitle">Категория</string>
+    <string name="TimeAny">Любое</string>
     <string name="registration">Registration</string>
     <string name="title_activity_maps">Map</string>
     <string name="api_key">AIzaSyDMIcxXJfAnRXGu9wuIta9_-dIDU9ggVzc</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
