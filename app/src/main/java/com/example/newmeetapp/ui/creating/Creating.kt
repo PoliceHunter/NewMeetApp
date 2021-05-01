@@ -72,7 +72,7 @@ class Creating : Fragment() {
         //DB connect
         database = FirebaseDatabase.getInstance()
         databaseReference = database?.reference!!.child("places")
-        val apiKey = getString(R.string.api_key)
+        val apiKey = getString(R.string.api_key2)
 
         // 64-86 autocomplete
         if (!Places.isInitialized()) {
