@@ -65,6 +65,7 @@ class Creating : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         viewModel = ViewModelProvider(this).get(CreatingViewModel::class.java)
         // TODO: Use the ViewModel
 
