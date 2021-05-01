@@ -234,15 +234,15 @@
             app:layout_constraintStart_toStartOf="@+id/textViewEventRegion"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEventPlace" />
 
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:id="@+id/textInputLayoutEventDate"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="10dp"
-            app:boxStrokeColor="@color/blue_inCreating"
+            android:background="@drawable/white_with_grey_stroke"
             app:errorEnabled="true"
             app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="@+id/textViewEventDate"
@@ -250,14 +250,16 @@
             app:layout_constraintStart_toStartOf="@+id/textViewEventDate"
             app:layout_constraintTop_toBottomOf="@+id/textViewEventDate">
 
-            <EditText
+            <TextView
                 android:id="@+id/eventDate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="10.04.2021 (Сделать DatePicker, чтобы дата была в нужном формате + проверка на то, что дата не в прошлом/ Либо просто сделать проверку на введенный формат и то, что не в прошлом)"
-                android:inputType="date" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:hint="Нажмите, что установить дату"
+                android:textSize="16sp" />
+
+        </LinearLayout>
 
 <!-- Время события-->
         <TextView
@@ -265,6 +267,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/EventTimeTitle"
+            android:layout_marginTop="16dp"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/textViewEventDate"
             app:layout_constraintHorizontal_bias="0.0"
@@ -418,7 +421,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="1"
-                    android:inputType="number"
                     android:padding="0dp"
                     android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
