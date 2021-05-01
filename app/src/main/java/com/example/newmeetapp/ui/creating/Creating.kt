@@ -17,6 +17,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.newmeetapp.R
+import com.example.newmeetapp.ui.inviting.InvitingFragment
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.libraries.places.api.Places
@@ -122,9 +123,9 @@ class Creating : Fragment() {
 
         bt_next.setOnClickListener {
             if (validation()) {
-                Log.d("Args wich save to db", "time - ${radioTime?.text}, sex - ${radioSex?.text}, name - ${etEventName?.text} . ${textInputEditTextEventName.text}")
-
+                Log.d("Args which save to db", "time - ${radioTime?.text}, sex - ${radioSex?.text}, name - ${etEventName?.text} . ${textInputEditTextEventName.text}")
             }
+            goToInvitations(it)
         }
     // возможно, нужно очищать поле или при мапинге в бд смотреть на состояние свитч
         view?.let { switchParticipantsCountVisibility(it) }
@@ -162,12 +163,12 @@ class Creating : Fragment() {
     }
 
 
-//    fun goToInvitations (view: View) {
-//        val btNext = view.findViewById<Button>(R.id.bt_next)
-//        btNext.setOnClickListener {
-//                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, InvitingFragment()).addToBackStack(null).commit()
-//            }
-//    }
+    fun goToInvitations (view: View) {
+        val btNext = view.findViewById<Button>(R.id.bt_next)
+        btNext.setOnClickListener {
+                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, InvitingFragment()).addToBackStack(null).commit()
+            }
+    }
 
 
 

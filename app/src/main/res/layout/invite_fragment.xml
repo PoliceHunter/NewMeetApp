@@ -22,7 +22,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <ListView
-        android:id="@+id/lvMain"
+        android:id="@+id/listViewInviting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>
