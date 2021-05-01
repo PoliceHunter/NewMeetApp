@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+
+<LinearLayout
+    android:id="@+id/layout_eventName_inList"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+
+    <TextView
+        android:id="@+id/eventName_in_list"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="6dp"
+        tools:text="Пойти погулять в Парке Горького и поесть мороженого"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/eventCategory_ImageId"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/eventCategory_ImageId"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </ImageView>
+</LinearLayout>
+    <LinearLayout
+    android:id="@+id/layout_eventDateTime_inList"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent">
+        <TextView
+            android:id="@+id/eventTime_in_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="32dp"
+            tools:text="Вечер"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/layout_eventName_inList"
+            app:layout_constraintTop_toBottomOf="@id/layout_eventName_inList" />
+    <TextView
+        android:id="@+id/eventDate_in_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="32dp"
+        tools:text="25.05.2021 (пятница)"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/layout_eventName_inList"
+        app:layout_constraintTop_toBottomOf="@id/layout_eventName_inList" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

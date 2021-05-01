@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Bottom Menu App</string>
+    <string name="app_name">newmeetapp</string>
     <string name="title_search">Поиск событий</string>
     <string name="title_map">Карта событий</string>
     <string name="title_eventCreating">Создание событий</string>
@@ -25,6 +25,6 @@
     <string name="registration">Registration</string>
     <string name="title_activity_maps">Map</string>
     <string name="api_key">AIzaSyDMIcxXJfAnRXGu9wuIta9_-dIDU9ggVzc</string>
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
 </resources>

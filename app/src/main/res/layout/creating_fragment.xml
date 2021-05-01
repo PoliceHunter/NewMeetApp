@@ -45,7 +45,8 @@
                 android:id="@+id/textInputEditTextEventName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hintEventName_cinema" />
+                android:hint="@string/hintEventName_cinema"
+                android:maxLength="50" />
         </com.google.android.material.textfield.TextInputLayout>
 
 <!-- Категория события-->
@@ -309,6 +310,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewEventTime">
 
             <RadioGroup
+                android:id="@+id/timeEventGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -474,6 +476,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewEventGender">
 
             <RadioGroup
+                android:id="@+id/radioSexGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

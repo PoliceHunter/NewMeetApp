@@ -19,9 +19,11 @@ import com.google.firebase.database.*
 
 class MapsFragment : Fragment() {
 
+
     private lateinit var mMap: GoogleMap
     private lateinit var databaseReference: DatabaseReference
     var database: FirebaseDatabase? = null
+
 
     private val callback = OnMapReadyCallback { googleMap ->
         /**
@@ -34,13 +36,10 @@ class MapsFragment : Fragment() {
          * user has installed Google Play services and returned to the app.
          */
 
-        // DataBase initailization
+
         database = FirebaseDatabase.getInstance()
         databaseReference = database?.reference!!.child("places")
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-
-        //val user = auth.currentUser
         mMap = googleMap
 
         databaseReference.addValueEventListener(object: ValueEventListener
@@ -62,9 +61,9 @@ class MapsFragment : Fragment() {
 //                        Log.i("log complete", "all good")
                     mMap = googleMap
                     mMap.addMarker(
-                        MarkerOptions()
-                            .position(etPlaceLatLng)
-                            .title(etPlaceName))
+                            MarkerOptions()
+                                    .position(etPlaceLatLng)
+                                    .title(etPlaceName))
                 }
             }
 
@@ -72,14 +71,14 @@ class MapsFragment : Fragment() {
                 Log.d("Error access to db", "All bad")
             }
         })
-        // Add a marker in Sydney and move the camera
         val moscow = LatLng(55.7522, 37.6156)
 //        mMap.addMarker(
 //            MarkerOptions()
 //                .position(moscow)
 //                .title("Marker in Moscow"))
-        mMap.maxZoomLevel
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(moscow))
+
+        googleMap.addMarker(MarkerOptions().position(moscow).title("Marker in Moscow"))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(moscow, 10f))
     }
 
     override fun onCreateView(
@@ -87,14 +86,14 @@ class MapsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.fragment_maps, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
-
     }
-
 }

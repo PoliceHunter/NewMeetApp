@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Newmeetapp"
+        android:theme="@style/Theme.newmeetapp"
         android:usesCleartextTraffic="true">
 
         <!--
@@ -37,7 +37,10 @@
         </activity>
 
         <activity android:name=".RegistrationActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

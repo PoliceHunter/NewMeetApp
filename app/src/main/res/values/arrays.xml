@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="names">
+        <item>Пойти в кино</item>
+        <item>Сходить в антикафе</item>
+        <item>Затусить на выходных</item>
+        <item>Походить по магазинам</item>
+        <item>Выпить в баре</item>
+        <item>Погулять</item>
+        <item>Покататься на великах по Москве</item>
+        <item>го в кино</item>
+        <item>Посмотреть вместе сериалы</item>
+        <item>Бла-бла-бла</item>
+        <item>Cадить цветы</item>
+    </string-array>
+
+    <string-array name="dates">
+        <item>20.06.2021</item>
+        <item>21.06.2021</item>
+        <item>24.06.2021</item>
+        <item>24.06.2021</item>
+        <item>25.06.2021</item>
+        <item>25.06.2021</item>
+        <item>22.06.2021</item>
+        <item>27.06.2021</item>
+        <item>25.06.2021</item>
+        <item>20.06.2021</item>
+        <item>23.06.2021</item>
+    </string-array>
+
+</resources>

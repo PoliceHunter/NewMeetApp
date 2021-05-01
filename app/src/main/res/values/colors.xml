@@ -7,16 +7,16 @@
     <color name="navigation_off">#A9C2D1</color>
     <color name="blue_inCreating">#75B4EC</color>
     <color name="gray_text">#6F7275</color>
+
     <color name="backgroundColor">#0DBDAD</color>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#2196F3</color>
-
     <color name="colorTransparent">#009688</color>
 
     <color name="colorGradientStart">#FFFFFF</color>
 
-    <color name="colorGradientMiddle">#C5D7F6</color>
+    <color name="colorGradientMiddle">#A1C0F6</color>
 
     <color name="colorGradientEnd">#948DF1</color>
 </resources>

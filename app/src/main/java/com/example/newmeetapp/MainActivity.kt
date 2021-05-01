@@ -1,30 +1,44 @@
 package com.example.newmeetapp
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Adapter
+import android.widget.Button
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.libraries.places.api.Places
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.newmeetapp.ui.events.EventContent
+import com.example.newmeetapp.ui.events.MyEventRecyclerViewAdapter
+import com.example.newmeetapp.ui.inviting.InvitingFragment
+import kotlinx.android.synthetic.main.event_list_fragment.*
+import java.util.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
-    var databaseReference: DatabaseReference? = null
-    var database: FirebaseDatabase? = null
-    lateinit var auth: FirebaseAuth
+    lateinit var  MyEventRecyclerViewAdapter : MyEventRecyclerViewAdapter
+
+    private val random: Int
+        get() = Random().nextInt(9)
+
+    private val bigRandom: Int
+        get() = Random().nextInt(10000)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
@@ -35,101 +49,42 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_creating,
                 R.id.navigation_notifications,
                 R.id.navigation_profile))
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        //Firebase connect
-        auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance()
+        initRecyclerView()
 
-        val apiKey = getString(R.string.api_key)
-        if (!Places.isInitialized()) {
-            Places.initialize(applicationContext, apiKey)
+        val event = EventContent.Event(
+            eventId = bigRandom.toString(),
+            eventName = getRandomName(),
+            eventDate = getRandomDate(),
+            eventTime = getRandomDate(),
+            eventCategory = getRandomName()
+        )
+        MyEventRecyclerViewAdapter.setEvent(listOf(event))
+    }
+
+
+
+    private fun initRecyclerView() {
+        MyEventRecyclerViewAdapter = MyEventRecyclerViewAdapter()
+
+        with(eventListId) {
+            this?.layoutManager = LinearLayoutManager(context)
+            this?.adapter = MyEventRecyclerViewAdapter
+            this?.setHasFixedSize(true)
         }
+    }
 
-//        bt_next.setOnClickListener{
-//
-//
-//            // Initialize Place API
-//            if (!Places.isInitialized()) {
-//                Places.initialize(applicationContext, apiKey)
-//            }
-//            val autocompleteFragment = supportFragmentManager.findFragmentById(R.id.autocomplete_fragment) as AutocompleteSupportFragment
-//
-//            autocompleteFragment.setCountries("RU")
-//            // Specify the types of place data to return.
-//            autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS))
-//            autocompleteFragment.setOnPlaceSelectedListener(object : PlaceSelectionListener {
-//                override fun onPlaceSelected(place: Place) {
-//                    bt_next.setOnClickListener {
-//                        savePlaceToDB(place)
-//                    // TODO: Get info about the selected place.
-//                    Log.i("autocomplete", "Place: ${place.name}, ${place.id},  ${place.latLng}, ${place.address}")
-//                    }
-//                }
-//                override fun onError(status: Status) {
-//                    // TODO: Handle the error.
-//                    Log.i( "autocomplete", "An error occurred: $status")
-//                }
-//            })
+
+    private fun getRandomName() = resources.getStringArray(R.array.names)[random]
+    private fun getRandomDate() = resources.getStringArray(R.array.dates)[random]
+ //   private fun getRandomAvatarUrl() = "https://i.pravatar.cc/150?img=$random"
+
+//    fun goToInvitations (view: View) {
+//        val btNext = view.findViewById<Button>(R.id.bt_next)
+//        btNext.setOnClickListener {
+//            supportFragmentManager.beginTransaction().replace(R.id.frame_fragment_id, InvitingFragment()).addToBackStack(null).commit()
 //        }
-
-        /**
-         * Initialize Places. For simplicity, the API key is hard-coded. In a production
-         * environment we recommend using a secure mechanism to manage API keys.
-         */
-        /**
-         * Initialize Places. For simplicity, the API key is hard-coded. In a production
-         * environment we recommend using a secure mechanism to manage API keys.
-         */
-
-    }
-
-
-//    fun savePlaceToDB(place: Place)
-//    {
-//        // for pathString for place need unical id
-//        databaseReference = database?.reference!!.child("profile")
-//        val currentUserDb = databaseReference!!.child(place.id.toString())
-//        currentUserDb.child("name").setValue(place.name)
-//        currentUserDb.child("id").setValue(place.id)
-//        currentUserDb.child("LatLng").setValue(place.latLng)
-//        currentUserDb.child("address").setValue(place.address.toString())
-//        Toast.makeText(this, "The place will be added to DataBase", Toast.LENGTH_SHORT).show()
 //    }
-
-
-//    @SuppressLint("SetTextI18n")
-//    private fun loadProfile()
-////    {
-//        val user = auth.currentUser
-//        val userReference = databaseReference?.child(user?.uid!!)
-//
-//        emailText.text = "Email -- " + user?.email
-//        userReference?.addValueEventListener(object: ValueEventListener{
-//            override fun onDataChange(snapshot: DataSnapshot)
-//            {
-//                passwordText.text = snapshot.child("password").value.toString()
-//                firstnameText.text = "First name -- " + snapshot.child("firstname").value.toString()
-//                lastnameText.text = "Last name -- " +snapshot.child("lastname").value.toString()
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//        })
-//    }
-
-    fun logoutClickButton(view: View)
-    {
-        auth.signOut()
-        startActivity(Intent(this@MainActivity, LoginActivity::class.java))
-        finish()
-    }
-
-    fun goMapButton(view: View)
-    {
-        startActivity(Intent(this@MainActivity, MapsActivity::class.java))
-    }
 }
