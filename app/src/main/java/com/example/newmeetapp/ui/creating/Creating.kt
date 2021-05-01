@@ -1,12 +1,18 @@
 package com.example.newmeetapp.ui.creating
 
+import android.icu.text.DateFormat
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.TextUtils
 import android.util.Log
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.RequiresApi
+import androidx.core.util.PatternsCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -21,17 +27,23 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.creating_fragment.*
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class Creating : Fragment() {
 
     private lateinit var mMap: GoogleMap
     private lateinit var databaseReference: DatabaseReference
-    private lateinit var etPlace: Place
+    var etPlace: Place? = null
     var database: FirebaseDatabase? = null
     var radioTime: RadioButton? = null
     var radioSex: RadioButton? = null
     var etEventName : EditText? = null
+    val MAX_LENTH_NAME = 5
 
     companion object {
         fun newInstance() = Creating()
@@ -88,6 +100,7 @@ class Creating : Fragment() {
         textInputEditTextEventName.addTextChangedListener {
             etEventName = activity?.findViewById(R.id.textInputEditTextEventName) as EditText
             val etTextEventName = childFragmentManager.findFragmentById(R.id.textInputEditTextEventName)
+            Log.i("etTextEventName= ", "$etTextEventName")
         }
 
         timeEventGroup.setOnCheckedChangeListener(
@@ -107,17 +120,36 @@ class Creating : Fragment() {
 
 
 
+        bt_next.setOnClickListener {
+            if (validation()) {
+                Log.d("Args wich save to db", "time - ${radioTime?.text}, sex - ${radioSex?.text}, name - ${etEventName?.text} . ${textInputEditTextEventName.text}")
 
-
-        bt_next.setOnClickListener{
-            Log.d("Args wich save to db", "time - ${radioTime?.text}, sex - ${radioSex?.text}, name - ${etEventName?.text} . ${textInputEditTextEventName.text}" +
-                    "place - ${etPlace.address}")
+            }
         }
     // возможно, нужно очищать поле или при мапинге в бд смотреть на состояние свитч
         view?.let { switchParticipantsCountVisibility(it) }
 
     }
 
+    private fun validation() : Boolean
+    {
+        if (textInputEditTextEventName.text?.isEmpty()!!)
+        {
+            textInputEditTextEventName.error = "Please enter event name"
+            return false
+        }
+        if (textInputEditTextEventName.text?.length!! > MAX_LENTH_NAME)
+        {
+            textInputEditTextEventName.error = "Event name must be less than $MAX_LENTH_NAME characters"
+            return false
+        }
+        if (eventDate.text.isEmpty())
+        {
+            eventDate.error = "Please enter date"
+            return false
+        }
+        return true
+    }
 
 
     private fun savePlaceToDB(place: Place) {
