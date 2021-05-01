@@ -37,6 +37,8 @@
             app:boxStrokeColor="@color/blue_inCreating"
             app:errorEnabled="true"
             app:hintEnabled="false"
+            app:counterEnabled="true"
+            app:counterMaxLength="40"
             app:layout_constraintEnd_toEndOf="@+id/textViewEventName"
             app:layout_constraintStart_toStartOf="@+id/textViewEventName"
             app:layout_constraintTop_toBottomOf="@+id/textViewEventName">
@@ -46,7 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hintEventName_cinema"
-                android:maxLength="50" />
+                android:maxLength="40"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 <!-- Категория события-->
@@ -62,144 +64,117 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEventName"/>
 
 
-            <RadioGroup
-                android:id="@+id/radioGroupEventCategory"
+        <RadioGroup
+            android:id="@+id/radioGroupEventCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@+id/textViewEventCategory"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/textViewEventCategory"
+            app:layout_constraintTop_toBottomOf="@+id/textViewEventCategory">
+
+
+            <RadioButton
+                android:id="@+id/RadioBtCategory_Walk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="@+id/textViewEventCategory"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/textViewEventCategory"
-                app:layout_constraintTop_toBottomOf="@+id/textViewEventCategory">
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/radio_selector"
+                android:button="@android:color/transparent"
+                android:text="Прогулка"
+                android:textAlignment="center"
+                android:textColor="@drawable/radio_text_event_time" />
 
-                <LinearLayout
-                    android:id="@+id/linearLayout_Radio_EventCategory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="10dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-                    <RadioButton
-                        android:id="@+id/RadioBtCategory_Walk"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/radio_selector"
-                        android:button="@android:color/transparent"
-                        android:layout_marginEnd="@dimen/text_margin"
-                        android:text="Прогулка"
-                        android:textAlignment="center"
-                        android:textColor="@drawable/radio_text_event_time" />
+            <RadioButton
+                android:id="@+id/RadioBtCategory_Active"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/radio_selector"
+                android:button="@android:color/transparent"
+                android:text="Активный отдых"
+                android:textAlignment="center"
+                android:textColor="@drawable/radio_text_event_time" />
 
-                    <RadioButton
-                        android:id="@+id/RadioBtCategory_Active"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/radio_selector"
-                        android:button="@android:color/transparent"
-                        android:layout_marginEnd="@dimen/text_margin"
-                        android:text="Активный отдых"
-                        android:textAlignment="center"
-                        android:textColor="@drawable/radio_text_event_time" />
+            <RadioButton
+                android:id="@+id/RadioBtCategory_Food"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/radio_selector"
+                android:button="@android:color/transparent"
+                android:text="Еда"
+                android:textAlignment="center"
+                android:textColor="@drawable/radio_text_event_time" />
 
-                    <RadioButton
-                        android:id="@+id/RadioBtCategory_Food"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/radio_selector"
-                        android:button="@android:color/transparent"
-                        android:text="Еда"
-                        android:textAlignment="center"
-                        android:textColor="@drawable/radio_text_event_time" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/linearLayout_Radio_EventCategory2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="10dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-                    <RadioButton
-                        android:id="@+id/RadioBtCategory_Culture"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/radio_selector"
-                        android:button="@android:color/transparent"
-                        android:layout_marginEnd="@dimen/text_margin"
-                        android:text="Культура"
-                        android:textAlignment="center"
-                        android:textColor="@drawable/radio_text_event_time" />
-                    <RadioButton
-                        android:id="@+id/RadioBtCategory_Travel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/radio_selector"
-                        android:button="@android:color/transparent"
-                        android:layout_marginEnd="@dimen/text_margin"
-                        android:text="Путешествия"
-                        android:textAlignment="center"
-                        android:textColor="@drawable/radio_text_event_time" />
-                    <RadioButton
-                        android:id="@+id/RadioBtCategory_Concerts"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/radio_selector"
-                        android:button="@android:color/transparent"
-                        android:text="Концерты"
-                        android:textAlignment="center"
-                        android:textColor="@drawable/radio_text_event_time" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/linearLayout_Radio_EventCategory3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="10dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:layout_weight="1">
+            <RadioButton
+                android:id="@+id/RadioBtCategory_Culture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/radio_selector"
+                android:button="@android:color/transparent"
+                android:text="Культура"
+                android:textAlignment="center"
+                android:textColor="@drawable/radio_text_event_time" />
+
+            <RadioButton
+                android:id="@+id/RadioBtCategory_Travel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/radio_selector"
+                android:button="@android:color/transparent"
+                android:text="Путешествия"
+                android:textAlignment="center"
+                android:textColor="@drawable/radio_text_event_time" />
+
+            <RadioButton
+                android:id="@+id/RadioBtCategory_Concerts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/radio_selector"
+                android:button="@android:color/transparent"
+                android:text="Концерты"
+                android:textAlignment="center"
+                android:textColor="@drawable/radio_text_event_time" />
 
 
-                    <RadioButton
-                        android:id="@+id/RadioBtCategory_Study"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/radio_selector"
-                        android:button="@android:color/transparent"
-                        android:layout_marginEnd="@dimen/text_margin"
-                        android:text="Образование"
-                        android:textAlignment="center"
-                        android:textColor="@drawable/radio_text_event_time" />
+            <RadioButton
+                android:id="@+id/RadioBtCategory_Study"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/radio_selector"
+                android:button="@android:color/transparent"
+                android:text="Образование"
+                android:textAlignment="center"
+                android:textColor="@drawable/radio_text_event_time" />
 
-                    <RadioButton
-                        android:id="@+id/RadioBtCategory_Other"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/radio_selector"
-                        android:button="@android:color/transparent"
-                        android:text="Другое"
-                        android:textAlignment="center"
-                        android:textColor="@drawable/radio_text_event_time" />
-                </LinearLayout>
-
-
-
-            </RadioGroup>
+            <RadioButton
+                android:id="@+id/RadioBtCategory_Other"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/radio_selector"
+                android:button="@android:color/transparent"
+                android:checked="true"
+                android:text="Другое"
+                android:textAlignment="center"
+                android:textColor="@drawable/radio_text_event_time" />
+        </RadioGroup>
 
 <!-- Место события-->
         <TextView
@@ -207,6 +182,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/EventPlaceTitle"
+            android:layout_marginTop="16dp"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/textViewEventCategory"
             app:layout_constraintHorizontal_bias="0.0"
@@ -216,57 +192,57 @@
         <RelativeLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/textInputLayoutEventPlace"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="10dp"
-            app:boxStrokeColor="@color/blue_inCreating"
-            app:errorEnabled="true"
+            android:background="@drawable/white_with_grey_stroke"
             app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="@+id/textViewEventRegion"
             app:layout_constraintStart_toStartOf="@+id/textViewEventRegion"
             app:layout_constraintTop_toBottomOf="@+id/textViewEventRegion">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginRight="6dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginLeft="6dp">
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:id="@+id/cardView_eventPlace"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginRight="6dp"-->
+<!--                android:layout_marginTop="6dp"-->
+<!--                android:layout_marginLeft="6dp">-->
+
 
                 <fragment
                     android:id="@+id/autocomplete_fragment"
                     android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
-
-            </androidx.cardview.widget.CardView>
+           <!--            </androidx.cardview.widget.CardView>-->
 
         </RelativeLayout>
-
 <!-- Дата события-->
         <TextView
             android:id="@+id/textViewEventDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/EventDateTitle"
+            android:layout_marginTop="16dp"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/textViewEventRegion"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textViewEventRegion"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEventPlace" />
 
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:id="@+id/textInputLayoutEventDate"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="52dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="10dp"
-            app:boxStrokeColor="@color/blue_inCreating"
+            android:background="@drawable/white_with_grey_stroke"
             app:errorEnabled="true"
             app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="@+id/textViewEventDate"
@@ -274,14 +250,16 @@
             app:layout_constraintStart_toStartOf="@+id/textViewEventDate"
             app:layout_constraintTop_toBottomOf="@+id/textViewEventDate">
 
-            <EditText
+            <TextView
                 android:id="@+id/eventDate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="10.04.2021 (Сделать DatePicker, чтобы дата была в нужном формате + проверка на то, что дата не в прошлом/ Либо просто сделать проверку на введенный формат и то, что не в прошлом)"
-                android:inputType="date" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:hint="Нажмите, что установить дату"
+                android:textSize="16sp" />
+
+        </LinearLayout>
 
 <!-- Время события-->
         <TextView
@@ -289,6 +267,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/EventTimeTitle"
+            android:layout_marginTop="16dp"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/textViewEventDate"
             app:layout_constraintHorizontal_bias="0.0"
@@ -442,7 +421,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="1"
-                    android:inputType="number"
                     android:padding="0dp"
                     android:textSize="12sp" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -530,7 +508,7 @@
             android:id="@+id/textViewEventDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:text="@string/EventDetails"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/textViewEventGender"
