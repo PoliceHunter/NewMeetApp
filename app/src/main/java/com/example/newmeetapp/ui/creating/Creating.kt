@@ -1,18 +1,12 @@
 package com.example.newmeetapp.ui.creating
 
-import android.icu.text.DateFormat
-import android.os.Build
+import android.app.DatePickerDialog
 import android.os.Bundle
-import android.provider.MediaStore
-import android.text.TextUtils
 import android.util.Log
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.annotation.RequiresApi
-import androidx.core.util.PatternsCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -23,16 +17,12 @@ import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.creating_fragment.*
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.random.Random
 
 class Creating : Fragment() {
 
@@ -43,7 +33,9 @@ class Creating : Fragment() {
     var radioTime: RadioButton? = null
     var radioSex: RadioButton? = null
     var etEventName : EditText? = null
-    val MAX_LENTH_NAME = 5
+    var radioCategory : RadioButton? = null
+    private lateinit var etUnicalID : UUID
+    val MIN_LENTH_NAME = 3
 
     companion object {
         fun newInstance() = Creating()
@@ -61,18 +53,18 @@ class Creating : Fragment() {
 
         return inflater.inflate(R.layout.creating_fragment, container, false)
 
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
         viewModel = ViewModelProvider(this).get(CreatingViewModel::class.java)
         // TODO: Use the ViewModel
 
         //DB connect
         database = FirebaseDatabase.getInstance()
-        databaseReference = database?.reference!!.child("places")
-        val apiKey = getString(R.string.api_key2)
+        databaseReference = database?.reference!!.child("events")
+        val apiKey = getString(R.string.api_key)
 
         // 64-86 autocomplete
         if (!Places.isInitialized()) {
@@ -103,6 +95,13 @@ class Creating : Fragment() {
             Log.i("etTextEventName= ", "$etTextEventName")
         }
 
+        radioGroupEventCategory.setOnCheckedChangeListener(
+            RadioGroup.OnCheckedChangeListener{
+                group, checkedId ->
+                radioCategory = activity?.findViewById(checkedId)
+            }
+        )
+
         timeEventGroup.setOnCheckedChangeListener(
                 RadioGroup.OnCheckedChangeListener{
                     group, checkedId ->
@@ -117,17 +116,40 @@ class Creating : Fragment() {
                 }
         )
 
+        //Calendar
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        eventDate.setOnClickListener {
+            val dpd = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
+                //set to TextView
+                eventDate.setText(""+ mDay + "." + (mMonth + 1) + "." + mYear)
+            }, year, month, day)
+            dpd.show()
+        }
+
+        view?.let { switchParticipantsCountVisibility(it) }
 
 
 
         bt_next.setOnClickListener {
             if (validation()) {
-                Log.d("Args wich save to db", "time - ${radioTime?.text}, sex - ${radioSex?.text}, name - ${etEventName?.text} . ${textInputEditTextEventName.text}")
+
+                etUnicalID = UUID.randomUUID()
+                Log.d("Args wich save to db", "time - ${radioTime?.text}, sex - ${radioSex?.text}, name - ${etEventName?.text}dd")
+                val currentUserDb = databaseReference.child(etUnicalID.toString())
+                currentUserDb.child("name").setValue(etEventName?.text.toString())
+                currentUserDb.child("time").setValue(radioTime?.text.toString())
+                currentUserDb.child("gender").setValue(radioSex?.text.toString())
+                currentUserDb.child("category").setValue(radioCategory?.text.toString())
+                currentUserDb.child("participants").setValue(textInputEditTextEventParticipantsCount.text.toString())
+                currentUserDb.child("date").setValue(eventDate.text.toString())
+                etPlace?.let { it1 -> savePlaceToDB(it1) }
 
             }
         }
     // возможно, нужно очищать поле или при мапинге в бд смотреть на состояние свитч
-        view?.let { switchParticipantsCountVisibility(it) }
 
     }
 
@@ -138,9 +160,9 @@ class Creating : Fragment() {
             textInputEditTextEventName.error = "Please enter event name"
             return false
         }
-        if (textInputEditTextEventName.text?.length!! > MAX_LENTH_NAME)
+        if (textInputEditTextEventName.text?.length!! < MIN_LENTH_NAME)
         {
-            textInputEditTextEventName.error = "Event name must be less than $MAX_LENTH_NAME characters"
+            textInputEditTextEventName.error = "Event name must be more than $MIN_LENTH_NAME characters"
             return false
         }
         if (eventDate.text.isEmpty())
@@ -148,13 +170,22 @@ class Creating : Fragment() {
             eventDate.error = "Please enter date"
             return false
         }
+        if (switchEventParticipantsCount.isChecked)
+        {
+            if (textInputEditTextEventParticipantsCount.text?.isEmpty()!!)
+            {
+                Log.i("Swicth","${textInputEditTextEventParticipantsCount.text} and it-s worked")
+                textInputEditTextEventParticipantsCount.error = "Please enter count participants"
+                return false
+            }
+        }
         return true
     }
 
 
     private fun savePlaceToDB(place: Place) {
         // for pathString for place need unical id
-        val currentUserDb = databaseReference.child(place.id.toString())
+        val currentUserDb = databaseReference.child("$etUnicalID/place")
         currentUserDb.child("name").setValue(place.name)
         currentUserDb.child("id").setValue(place.id)
         currentUserDb.child("LatLng").setValue(place.latLng)
@@ -174,8 +205,15 @@ class Creating : Fragment() {
 
     private fun switchParticipantsCountVisibility (view: View) {
         view.findViewById<Switch>(R.id.switchEventParticipantsCount).setOnCheckedChangeListener { _, isChecked ->
-            view.findViewById<TextInputLayout>(R.id.textInputLayoutEventParticipantsCount).visibility = if (isChecked) View.VISIBLE
-            else View.INVISIBLE
+            view.findViewById<TextInputLayout>(R.id.textInputLayoutEventParticipantsCount).visibility = if (isChecked)
+            {
+                View.VISIBLE
+            }
+            else
+            {
+                textInputEditTextEventParticipantsCount.text = null
+                View.INVISIBLE
+            }
         }
     }
 
