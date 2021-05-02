@@ -2,28 +2,20 @@ package com.example.newmeetapp
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Adapter
-import android.widget.Button
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.widget.ArrayAdapter
+import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.newmeetapp.ui.events.EventContent
 import com.example.newmeetapp.ui.events.MyEventRecyclerViewAdapter
-import com.example.newmeetapp.ui.inviting.InvitingFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.event_list_fragment.*
 import java.util.*
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -62,6 +54,8 @@ class MainActivity : AppCompatActivity() {
             eventCategory = getRandomName()
         )
         MyEventRecyclerViewAdapter.setEvent(listOf(event))
+
+
     }
 
 
@@ -74,6 +68,17 @@ class MainActivity : AppCompatActivity() {
             this?.adapter = MyEventRecyclerViewAdapter
             this?.setHasFixedSize(true)
         }
+    }
+
+    private fun listParticipants() {
+        val names = arrayOf(
+            "Иван", "Марья", "Петр", "Антон", "Даша", "Борис",
+            "Костя", "Игорь", "Анна", "Денис", "Андрей"
+        )
+        var lvInviting: ListView = findViewById<View>(R.id.listViewInviting) as ListView
+
+        val myParticipantsAdapter = ArrayAdapter(this, R.layout.list_participant_item, names)
+        lvInviting.adapter = myParticipantsAdapter;
     }
 
 
