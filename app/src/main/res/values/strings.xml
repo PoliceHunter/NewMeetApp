@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">newmeetapp</string>
+    <string name="app_name">LanitUp</string>
     <string name="title_search">Поиск событий</string>
     <string name="title_map">Карта событий</string>
     <string name="title_eventCreating">Создание событий</string>
@@ -22,10 +22,18 @@
     <string name="EventDetails">Детали события</string>
     <string name="EventCategoryTitle">Категория</string>
     <string name="TimeAny">Любое</string>
-    <string name="registration">Registration</string>
+    <string name="registration">Регистрация</string>
     <string name="title_activity_maps">Map</string>
     <string name="api_key">AIzaSyDMIcxXJfAnRXGu9wuIta9_-dIDU9ggVzc</string>
     <string name="api_key2">AIzaSyBj5EiuYVq-xVlYIZXOEZ3ZsFaudbefJ6s</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="authorization">Авторизация</string>
+    <string name="no_account">Нет аккаунта?</string>
+    <string name="Name">Имя</string>
+    <string name="last_name">Фамилия</string>
+    <string name="corp_email">Корпоративная почта</string>
+    <string name="password">Пароль</string>
+    <string name="repeat_password">Повторите пароль</string>
+    <string name="sign_in">Войти</string>
 </resources>

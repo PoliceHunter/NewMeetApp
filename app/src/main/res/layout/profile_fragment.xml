@@ -1,299 +1,351 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.profile.Profile">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/linearLayoutWithName"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="10dp">
+        android:layout_height="match_parent"
+        tools:context=".ui.profile.Profile">
 
-        <ImageView
-            android:id="@+id/AvatarId"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginTop="4dp">
-        </ImageView>
         <LinearLayout
-            android:id="@+id/linearLayoutWithNameCity"
+            android:id="@+id/linearLayoutWithName"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="10dp">
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/AvatarId"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="4dp"></ImageView>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutWithNameCity"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/nameId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="6dp"
+                    android:gravity="center_vertical"
+                    android:text="Имя + Фамилия"
+                    android:textColor="#B2000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold"></TextView>
+
+                <LinearLayout
+                    android:id="@+id/layoutCity"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayoutWithName">
+
+                    <ImageView
+                        android:id="@+id/GeoIcon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="2dp"
+                        android:background="@drawable/ic_location_for_profile"></ImageView>
+
+                    <TextView
+                        android:id="@+id/CityId"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="Москва"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"></TextView>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--        <RatingBar-->
+            <!--            style="@style/Widget.AppCompat.RatingBar"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content">-->
+            <!--        </RatingBar>-->
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayoutWithAbout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutWithName">
+
             <TextView
-                android:id="@+id/nameId"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="6dp"
-                android:gravity="center_vertical"
-                android:text="Имя + Фамилия"
-                android:textColor="#B2000000"
-                android:textSize="20sp"
-                android:textStyle="bold">
-            </TextView>
+                android:text="Обо мне"
+                android:textSize="14sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"></TextView>
+
             <LinearLayout
-                android:id="@+id/layoutCity"
+                android:id="@+id/textInputLayoutAbout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginStart="4dp"
-                app:layout_constraintTop_toBottomOf="@id/linearLayoutWithName" >
-                <ImageView
-                    android:id="@+id/GeoIcon"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginEnd="2dp"
-                    android:background="@drawable/ic_location_for_profile">
-                </ImageView>
+                android:accessibilityPaneTitle="Обо мне">
+
                 <TextView
-                    android:id="@+id/CityId"
+                    android:id="@+id/AboutId"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Москва"
-                    android:textSize="12sp"
+                    android:text="Люблю котяток и винишко"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:gravity="center_vertical">
-                </TextView>
+                    app:layout_constraintStart_toStartOf="parent"></TextView>
             </LinearLayout>
         </LinearLayout>
 
-<!--        <RatingBar-->
-<!--            style="@style/Widget.AppCompat.RatingBar"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content">-->
-<!--        </RatingBar>-->
-
-    </LinearLayout>
-
-
-
-    <LinearLayout
-        android:id="@+id/linearLayoutWithAbout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayoutWithName"
-        android:orientation="vertical"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp">
-
-        <TextView
+        <LinearLayout
+            android:id="@+id/linearLayoutWithContacts"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Обо мне"
-            android:textStyle="italic"
-            android:textSize="14sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-        </TextView>
-        <LinearLayout
-            android:id="@+id/textInputLayoutAbout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="10dp"
-            android:accessibilityPaneTitle="Обо мне">
-            <TextView
-                android:id="@+id/AboutId"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Люблю котяток и винишко"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-            </TextView>
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linearLayoutWithContacts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayoutWithAbout"
-        android:orientation="vertical"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutWithAbout">
 
-        <LinearLayout
-            android:id="@+id/textInputLayoutBirthDay"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="10dp">
-            <ImageView
-                android:id="@+id/BirthDayIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="6dp"
-                android:background="@drawable/ic_gift">
-            </ImageView>
-            <TextView
-                android:id="@+id/BirthDayId"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="27.09.1999"
+            <LinearLayout
+                android:id="@+id/textInputLayoutBirthDay"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:gravity="center_vertical">
-            </TextView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/textInputLayoutPhone"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="10dp">
-            <ImageView
-                android:id="@+id/PhoneIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="6dp"
-                android:background="@drawable/ic_call">
-            </ImageView>
-            <TextView
-                android:id="@+id/PhoneId"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="+7 (903) 626-99-99"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="10dp">
+
+                <ImageView
+                    android:id="@+id/BirthDayIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/ic_gift"></ImageView>
+
+                <TextView
+                    android:id="@+id/BirthDayId"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="27.09.1999"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/textInputLayoutPhone"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:gravity="center_vertical">
-            </TextView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/textInputLayoutTelegram"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="10dp"
-            android:accessibilityPaneTitle="Обо мне">
-            <ImageView
-                android:id="@+id/TelegramIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="6dp"
-                android:background="@drawable/ic_telegram_round">
-            </ImageView>
-            <TextView
-                android:id="@+id/TelegramId"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Nickname"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="10dp">
+
+                <ImageView
+                    android:id="@+id/PhoneIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/ic_call"></ImageView>
+
+                <TextView
+                    android:id="@+id/PhoneId"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="+7 (903) 626-99-99"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/textInputLayoutTelegram"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:gravity="center_vertical">
-            </TextView>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/textInputLayoutInstagram"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="10dp"
-            android:accessibilityPaneTitle="Обо мне">
-            <ImageView
-                android:id="@+id/InstagramIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="6dp"
-                android:background="@drawable/ic_instagram">
-            </ImageView>
-            <TextView
-                android:id="@+id/InstagramId"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Nickname"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:gravity="center_vertical">
-            </TextView>
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/textInputLayoutVk"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="10dp"
-            android:accessibilityPaneTitle="Обо мне">
-            <ImageView
-                android:id="@+id/VkIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="6dp"
-                android:background="@drawable/ic_vk_round">
-            </ImageView>
-            <TextView
-                android:id="@+id/VkId"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="10dp"
+                android:accessibilityPaneTitle="Обо мне">
+
+                <ImageView
+                    android:id="@+id/TelegramIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/ic_telegram_round">
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/TelegramId"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Nickname"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/textInputLayoutInstagram"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Nickname"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:gravity="center_vertical">
-            </TextView>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
+                android:accessibilityPaneTitle="Обо мне">
+
+                <ImageView
+                    android:id="@+id/InstagramIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/ic_instagram"></ImageView>
+
+                <TextView
+                    android:id="@+id/InstagramId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Nickname"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/textInputLayoutVk"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
+                android:accessibilityPaneTitle="Обо мне">
+
+                <ImageView
+                    android:id="@+id/VkIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/ic_vk_round"></ImageView>
+
+                <TextView
+                    android:id="@+id/VkId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Nickname"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"></TextView>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayoutWithContacts">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/blue_what"
-            app:tabMaxWidth="0dp"
-            app:tabTextAppearance="?android:attr/textAppearanceMedium"
-            app:textAllCaps="false" />
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutWithContacts">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1">
+            </Space>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt_UpcomingEvents"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/ic_calendar">
+
+            </androidx.appcompat.widget.AppCompatButton>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"></Space>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt_PassedEvents"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/ic_clock">
+
+            </androidx.appcompat.widget.AppCompatButton>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"></Space>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt_FavouritesEvents"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/ic_hearts">
+
+            </androidx.appcompat.widget.AppCompatButton>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"></Space>
 
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/tabs_viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+        </LinearLayout>
 
-    </FrameLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

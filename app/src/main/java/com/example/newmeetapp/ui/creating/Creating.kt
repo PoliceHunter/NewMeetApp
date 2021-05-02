@@ -1,6 +1,7 @@
 package com.example.newmeetapp.ui.creating
 
 import android.app.DatePickerDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -65,7 +66,7 @@ class Creating : Fragment() {
         //DB connect
         database = FirebaseDatabase.getInstance()
         databaseReference = database?.reference!!.child("events")
-        val apiKey = getString(R.string.api_key)
+        val apiKey = getString(R.string.api_key2)
 
         // 64-86 autocomplete
         if (!Places.isInitialized()) {
@@ -128,6 +129,8 @@ class Creating : Fragment() {
                 eventDate.setText(""+ mDay + "." + (mMonth + 1) + "." + mYear)
             }, year, month, day)
             dpd.show()
+            dpd.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#2CAFF1"))
+            dpd.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#2CAFF1"))
         }
 
         view?.let { switchParticipantsCountVisibility(it) }
@@ -151,8 +154,6 @@ class Creating : Fragment() {
             }
             goToInvitations(it)
         }
-    // возможно, нужно очищать поле или при мапинге в бд смотреть на состояние свитч
-
     }
 
     private fun validation() : Boolean
@@ -194,7 +195,6 @@ class Creating : Fragment() {
         currentUserDb.child("address").setValue(place.address.toString())
     }
 
-
     fun goToInvitations (view: View) {
         val btNext = view.findViewById<Button>(R.id.bt_next)
         btNext.setOnClickListener {
@@ -202,13 +202,11 @@ class Creating : Fragment() {
             }
     }
 
-
-
-
     private fun switchParticipantsCountVisibility (view: View) {
         view.findViewById<Switch>(R.id.switchEventParticipantsCount).setOnCheckedChangeListener { _, isChecked ->
             view.findViewById<TextInputLayout>(R.id.textInputLayoutEventParticipantsCount).visibility = if (isChecked)
             {
+                textInputLayoutEventParticipantsCount.requestFocus()
                 View.VISIBLE
             }
             else
@@ -218,5 +216,4 @@ class Creating : Fragment() {
             }
         }
     }
-
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGradientMiddle"
+    android:background="@color/white"
     tools:context=".RegistrationActivity">
 
 
@@ -53,9 +53,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titleRegisterTv"
-                android:hint="Enter first name"
+                android:hint="@string/Name"
                 android:textColor="#000000"
-                android:inputType="text" />
+                android:inputType="text"
+                android:background="@color/white"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"/>
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -78,9 +80,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/firstnameInput"
-                android:hint="Enter last name"
+                android:hint="@string/last_name"
                 android:textColor="#000000"
-                android:inputType="text" />
+                android:inputType="text"
+                    android:background="@color/white"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"/>
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -104,8 +108,10 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/lastnameInput"
-                    android:hint="Enter email adress"
+                    android:hint="@string/corp_email"
                     android:textColor="#000000"
+                    android:background="@color/white"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -129,12 +135,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/emailInput"
-                android:hint="Enter password"
+                android:hint="@string/password"
                 android:textColor="#000000"
                 android:textColorHint="#808080"
-                android:backgroundTint="#808080"
                 android:textSize="15sp"
                 android:inputType="textPassword"
+                android:background="@color/white"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -159,16 +166,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/passwordInput"
-                android:hint="Repeat password"
+                android:hint="@string/repeat_password"
                 android:textColor="#000000"
                 android:textColorHint="#808080"
-                android:backgroundTint="#808080"
+                android:background="@color/white"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:textSize="15sp"
                 android:inputType="textPassword"
                 />
             </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/registerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -179,7 +187,7 @@
         android:text="Sign Up"
         android:textColor="#FFFFFF"
         android:textSize="15sp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/button_next"
         android:textStyle="bold"
         android:layout_marginTop="30dp"
         app:layout_constraintWidth_percent="0.7"

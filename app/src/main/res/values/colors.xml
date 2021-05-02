@@ -2,21 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="blue_what">#90D0E4</color>
-    <color name="navigation_on">#57ACDC</color>
+    <color name="navigation_on">#A3006DF0</color>
     <color name="navigation_off">#A9C2D1</color>
-    <color name="blue_inCreating">#75B4EC</color>
-    <color name="gray_text">#6F7275</color>
-
-    <color name="backgroundColor">#0DBDAD</color>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#2196F3</color>
-    <color name="colorTransparent">#009688</color>
-
-    <color name="colorGradientStart">#FFFFFF</color>
-
-    <color name="colorGradientMiddle">#A1C0F6</color>
-
-    <color name="colorGradientEnd">#948DF1</color>
+    <color name="lightBlue_Standard">#00C0F0</color>
+    <color name="darkBlue_Standard">#006DF0</color>
+    <color name="gray_text_for_title_in_creating">#6F7275</color>
+    <color name="gray_textor_title_in_creating">#2CAFF1</color>
 </resources>

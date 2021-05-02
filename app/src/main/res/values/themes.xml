@@ -6,20 +6,11 @@
         <item name="colorPrimaryVariant">#4C4C43</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/blue_inCreating</item>
+        <item name="colorSecondary">@color/lightBlue_Standard</item>
         <item name="colorSecondaryVariant">#FF5722</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-
-    <style name="Theme.newmeetapp.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="Theme.newmeetapp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.newmeetapp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
