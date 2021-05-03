@@ -146,9 +146,10 @@ class Creating : Fragment() {
                 currentUserDb.child("name").setValue(etEventName?.text.toString())
                 currentUserDb.child("time").setValue(radioTime?.text.toString())
                 currentUserDb.child("gender").setValue(radioSex?.text.toString())
+                currentUserDb.child("date").setValue(eventDate?.text.toString())
                 currentUserDb.child("category").setValue(radioCategory?.text.toString())
                 currentUserDb.child("participants").setValue(textInputEditTextEventParticipantsCount.text.toString())
-                currentUserDb.child("date").setValue(eventDate.text.toString())
+                currentUserDb.child("details").setValue(editText_eventDetails?.text.toString())
                 etPlace?.let { it1 -> savePlaceToDB(it1) }
 
             }
@@ -158,6 +159,22 @@ class Creating : Fragment() {
 
     private fun validation() : Boolean
     {
+        if (!timeEventGroup.isSelected)
+        {
+            timeEventGroup.check(R.id.RadioBtTimeAny)
+            radioTime = activity?.findViewById(R.id.RadioBtTimeAny)
+        }
+        if (!radioGroupEventCategory.isSelected)
+        {
+            radioGroupEventCategory.check(R.id.RadioBtCategory_Other)
+            radioCategory = activity?.findViewById(R.id.RadioBtCategory_Other)
+        }
+
+        if (!radioSexGroup.isSelected)
+        {
+            radioSexGroup.check(R.id.RadioBtGenderAny)
+            radioSex = activity?.findViewById(R.id.RadioBtGenderAny)
+        }
         if (textInputEditTextEventName.text?.isEmpty()!!)
         {
             textInputEditTextEventName.error = "Please enter event name"

@@ -38,7 +38,7 @@ class MapsFragment : Fragment() {
 
 
         database = FirebaseDatabase.getInstance()
-        databaseReference = database?.reference!!.child("places")
+        databaseReference = database?.reference!!.child("events")
 
         mMap = googleMap
 
@@ -46,24 +46,34 @@ class MapsFragment : Fragment() {
         {
             override fun onDataChange(snapshot: DataSnapshot)
             {
-                for (postSnapshot in snapshot.children) {
-                    // TODO: handle the post
-                    val etPlaceId = postSnapshot.child("id").value.toString()
-                    val etPlaceName = postSnapshot.child("name").value.toString()
-                    val etPlaceLat : Double = postSnapshot.child("LatLng/latitude").value as Double
-                    val etPlaceLng : Double = postSnapshot.child("LatLng/longitude").value as Double//.split(',')// (55.755826,37.6173)
-                    val etPlaceAddress = postSnapshot.child("address").value.toString()
-                    val moscowlog = LatLng(55.755826, 37.6173)
-                    val etPlaceLatLng = LatLng(etPlaceLat, etPlaceLng)
-                    Log.i("db reference info", "info ps - $postSnapshot,  ")
-                    Log.i("get from bd", "Place: ${etPlaceName}, || $etPlaceLat - $etPlaceLng ,== $moscowlog  == $etPlaceLatLng||")
-//                    if (moscowlog == etPlaceLatLng)
-//                        Log.i("log complete", "all good")
-                    mMap = googleMap
-                    mMap.addMarker(
-                            MarkerOptions()
+                if (snapshot.exists()) {
+                    for (postSnapshot in snapshot.children) {
+                        if (postSnapshot.child("place").exists()) {
+
+                            val etPlaceId = postSnapshot.child("place/id").value.toString()
+                            val etPlaceName = postSnapshot.child("place/name").value.toString()
+                            val etPlaceLat: Double =
+                                postSnapshot.child("place/LatLng/latitude").value as Double
+                            val etPlaceLng: Double =
+                                postSnapshot.child("place/LatLng/longitude").value as Double
+                            val etPlaceAddress =
+                                postSnapshot.child("place/address").value.toString()
+                            val moscowlog = LatLng(55.755826, 37.6173)
+                            val etPlaceLatLng = LatLng(etPlaceLat, etPlaceLng)
+                            val nameMarker = postSnapshot.child("name").value.toString()
+                            Log.i("db reference info", "info ps - $postSnapshot,  ")
+                            Log.i(
+                                "get from bd",
+                                "Place: ${etPlaceName}, || $etPlaceLat - $etPlaceLng ,== $moscowlog  == $etPlaceLatLng||"
+                            )
+                            mMap = googleMap
+                            mMap.addMarker(
+                                MarkerOptions()
                                     .position(etPlaceLatLng)
-                                    .title(etPlaceName))
+                                    .title(nameMarker)
+                            )
+                        }
+                    }
                 }
             }
 
@@ -72,12 +82,6 @@ class MapsFragment : Fragment() {
             }
         })
         val moscow = LatLng(55.7522, 37.6156)
-//        mMap.addMarker(
-//            MarkerOptions()
-//                .position(moscow)
-//                .title("Marker in Moscow"))
-
-        googleMap.addMarker(MarkerOptions().position(moscow).title("Marker in Moscow"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(moscow, 10f))
     }
 
