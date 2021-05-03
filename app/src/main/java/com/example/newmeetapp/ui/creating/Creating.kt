@@ -159,20 +159,17 @@ class Creating : Fragment() {
 
     private fun validation() : Boolean
     {
-        if (!timeEventGroup.isSelected)
+        if (radioTime == null)
         {
-            timeEventGroup.check(R.id.RadioBtTimeAny)
             radioTime = activity?.findViewById(R.id.RadioBtTimeAny)
         }
-        if (!radioGroupEventCategory.isSelected)
+        if (radioCategory == null)
         {
-            radioGroupEventCategory.check(R.id.RadioBtCategory_Other)
             radioCategory = activity?.findViewById(R.id.RadioBtCategory_Other)
         }
 
-        if (!radioSexGroup.isSelected)
+        if (radioSex == null)
         {
-            radioSexGroup.check(R.id.RadioBtGenderAny)
             radioSex = activity?.findViewById(R.id.RadioBtGenderAny)
         }
         if (textInputEditTextEventName.text?.isEmpty()!!)
