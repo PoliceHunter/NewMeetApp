@@ -154,7 +154,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="6dp"
-                    android:background="@drawable/ic_gift"></ImageView>
+                    android:background="@drawable/ic_profile_birthday"></ImageView>
 
                 <TextView
                     android:id="@+id/BirthDayId"
@@ -181,7 +181,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="6dp"
-                    android:background="@drawable/ic_call"></ImageView>
+                    android:background="@drawable/ic_profile_phone"></ImageView>
 
                 <TextView
                     android:id="@+id/PhoneId"
@@ -209,7 +209,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="6dp"
-                    android:background="@drawable/ic_telegram_round">
+                    android:background="@drawable/ic_profile_telegram">
                 </ImageView>
 
                 <TextView
@@ -239,7 +239,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="6dp"
-                    android:background="@drawable/ic_instagram"></ImageView>
+                    android:background="@drawable/ic_profile_instagram"></ImageView>
 
                 <TextView
                     android:id="@+id/InstagramId"
@@ -266,7 +266,7 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="6dp"
-                    android:background="@drawable/ic_vk_round"></ImageView>
+                    android:background="@drawable/ic_profile_vk"></ImageView>
 
                 <TextView
                     android:id="@+id/VkId"
@@ -303,7 +303,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/ic_calendar">
+                android:background="@drawable/ic_profile_calendar">
 
             </androidx.appcompat.widget.AppCompatButton>
 
@@ -319,7 +319,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/ic_clock">
+                android:background="@drawable/ic_profile_archive">
 
             </androidx.appcompat.widget.AppCompatButton>
 
@@ -335,14 +335,14 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/ic_hearts">
+                android:background="@drawable/ic_favourite_event">
 
             </androidx.appcompat.widget.AppCompatButton>
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_weight="1"></Space>
+                android:layout_weight="1"/>
 
 
         </LinearLayout>
