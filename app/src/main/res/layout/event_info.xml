@@ -141,7 +141,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/button_next"
+                android:background="@drawable/button_go"
                 android:paddingHorizontal="14dp"
                 android:text="Откликнуться"
                 android:textSize="12dp" />
@@ -153,7 +153,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/button_next"
+                android:background="@drawable/button_go"
                 android:paddingHorizontal="14dp"
                 android:text="Написать"
                 android:textSize="12dp" />
