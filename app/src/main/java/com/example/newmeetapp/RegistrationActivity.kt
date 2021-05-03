@@ -1,5 +1,6 @@
 package com.example.newmeetapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -37,6 +38,7 @@ class RegistrationActivity : AppCompatActivity(){
     }
 
 
+    @SuppressLint("LongLogTag")
     private fun register()
     {
         registerButton.setOnClickListener {
