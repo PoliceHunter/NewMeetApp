@@ -1,24 +1,25 @@
 package com.example.newmeetapp.ui.eventInfo
 
-import androidx.lifecycle.ViewModelProvider
+import android.annotation.SuppressLint
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.example.newmeetapp.R
+import com.example.newmeetapp.ui.events.Events
+import kotlinx.android.synthetic.main.event_info.*
 
-class EventInfo : Fragment() {
+class EventInfo : AppCompatActivity() {
+    @SuppressLint("SetTextI18n")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.event_info)
 
-    companion object {
-        fun newInstance() = EventInfo()
+        val bundle = intent.getSerializableExtra("event") as? Events
+
+        if (bundle != null) {
+            eventNameInfoId.text = bundle.name
+            eventCategoryInfoId.text = bundle.category
+            eventDateTimeInfoId.text = "${bundle.time}  ${bundle.date}"
+            eventDescriptionInfoId.text = bundle.details
+        }
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.profile_fragment, container, false)
-    }
-
 }

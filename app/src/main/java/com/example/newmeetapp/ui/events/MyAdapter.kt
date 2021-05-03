@@ -8,7 +8,7 @@ import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newmeetapp.R
 
-class MyAdapter(private val eventList : ArrayList<Events>) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class MyAdapter(private val eventList: ArrayList<Events>, private val onEventListener: OnEventListener) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
@@ -27,6 +27,10 @@ class MyAdapter(private val eventList : ArrayList<Events>) : RecyclerView.Adapte
         holder.dName.text = currentItem.name
         holder.dDate.text = currentItem.date
         holder.dTime.text = currentItem.time
+
+        holder.itemView.setOnClickListener{
+            onEventListener.onEventClick(position)
+        }
 
     }
 
