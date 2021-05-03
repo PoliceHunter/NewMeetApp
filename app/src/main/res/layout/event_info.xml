@@ -6,9 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".ui.eventInfo.EventInfo">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/layoutCategoryEventInfoId"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/eventCategoryInfoId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="6dp"
+                android:text="Прогулка"
+                android:textSize="20sp"
+                android:textStyle="italic"
+                app:layout_constraintEnd_toEndOf="@id/eventCategoryImageInfoId"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
                 android:id="@+id/eventCategoryImageInfoId"
@@ -17,166 +44,190 @@
                 android:layout_marginTop="6dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-            </ImageView>
+                app:layout_constraintStart_toStartOf="@id/eventCategoryInfoId"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutNameEventInfoId"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutCategoryEventInfoId">
 
             <TextView
                 android:id="@+id/eventNameInfoId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:textSize="20sp"
+                android:layout_marginTop="2dp"
                 android:text="Тут будет название события"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/eventCategoryImageInfoId" />
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt_FavouriteEvent"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/ic_favourite_event"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/eventDateTimeInfoId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Вечер 25.06.2021"
+            android:textColor="@color/darkBlue_Standard"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutNameEventInfoId" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/LayoutEventDescriptionInfoId"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="10dp"
+            app:boxStrokeColor="@color/lightBlue_Standard"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eventDateTimeInfoId"
+            app:layout_constraintVertical_bias="0.0">
+
             <TextView
-                android:id="@+id/eventDateTimeInfoId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Вечер 25.06.2021"
-                android:textStyle="italic"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/eventNameInfoId" />
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/LayoutEventDescrioptionInfoId"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="10dp"
-                    app:boxStrokeColor="@color/lightBlue_Standard"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/eventDateTimeInfoId"
-                    app:layout_constraintVertical_bias="0.0">
-
-                <TextView
-                    android:id="@+id/eventDescriptionInfoId"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="textMultiLine"
-                    android:text="Тут будет описание события события. Например: Давайте встретимся там-то там-то. Возьмите с собой то-то то-то и хорошее настроение"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/eventCategoryImageInfoId" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            <LinearLayout
-                android:id="@+id/layoutButtonsEventInfoId"
+                android:id="@+id/eventDescriptionInfoId"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:orientation="horizontal"
-                android:gravity="center"
+                android:layout_height="match_parent"
+                android:inputType="textMultiLine"
+                android:text="Тут будет описание события события. Например: Давайте встретимся там-то там-то. Возьмите с собой то-то то-то и хорошее настроение"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/LayoutEventDescrioptionInfoId">
+                app:layout_constraintTop_toBottomOf="@+id/eventCategoryImageInfoId" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/bt_go"
-                    android:layout_width="132dp"
-                    android:layout_height="32dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/button_go"
-                    android:paddingHorizontal="14dp"
-                    android:textSize="12dp"
-                    android:text="Откликнуться">
-                </androidx.appcompat.widget.AppCompatButton>
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/bt_chat"
-                    android:layout_width="132dp"
-                    android:layout_height="32dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginStart="16dp"
-                    android:paddingHorizontal="14dp"
-                    android:text="Написать"
-                    android:background="@drawable/button_go"
-                    android:textSize="12dp">
-                </androidx.appcompat.widget.AppCompatButton>
-            </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layoutButtonsEventInfoId"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/LayoutEventDescriptionInfoId">
 
-            <View
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="100dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutButtonsEventInfoId"
-                app:layout_constraintVertical_bias="0.076" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt_go"
+                android:layout_width="132dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/button_next"
+                android:paddingHorizontal="14dp"
+                android:text="Откликнуться"
+                android:textSize="12dp" />
 
-            <TextView
-                android:id="@+id/OrgLabelId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="Организатор"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/bt_chat"
+                android:layout_width="132dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/button_next"
+                android:paddingHorizontal="14dp"
+                android:text="Написать"
+                android:textSize="12dp" />
+        </LinearLayout>
 
-            <ImageView
-                android:id="@+id/OrgAvatarInfoId"
-                android:layout_width="52dp"
-                android:layout_height="52dp"
-                android:layout_marginTop="2dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.083"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/OrgLabelId">
-            </ImageView>
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="100dp"
+            android:background="@color/darkBlue_Standard"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutButtonsEventInfoId"
+            app:layout_constraintVertical_bias="0.076" />
 
-            <TextView
-                android:id="@+id/OrgNameInfoId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="Полина Белоцкая"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.13"
-                app:layout_constraintStart_toEndOf="@id/OrgAvatarInfoId"
-                app:layout_constraintTop_toBottomOf="@+id/OrgLabelId" />
+        <TextView
+            android:id="@+id/OrgLabelId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Организатор"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+        <ImageView
+            android:id="@+id/OrgAvatarInfoId"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.083"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/OrgLabelId" />
+
+        <TextView
+            android:id="@+id/OrgNameInfoId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Полина Белоцкая"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.13"
+            app:layout_constraintStart_toEndOf="@id/OrgAvatarInfoId"
+            app:layout_constraintTop_toBottomOf="@+id/OrgLabelId" />
 
         <!--Участники-->
 
-            <View
-                android:id="@+id/divider_2"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="100dp"
-                android:layout_marginTop="100dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/divider"
-                app:layout_constraintVertical_bias="0.348" />
+        <View
+            android:id="@+id/divider_2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="100dp"
+            android:background="@color/darkBlue_Standard"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/divider"
+            app:layout_constraintVertical_bias="0.348" />
 
-            <TextView
-                android:id="@+id/ParticipantsLabelId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="Участники"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider_2" />
+        <TextView
+            android:id="@+id/ParticipantsLabelId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Участники"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider_2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
