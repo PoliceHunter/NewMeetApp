@@ -35,10 +35,10 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="10dp"
             app:boxStrokeColor="@color/lightBlue_Standard"
-            app:errorEnabled="true"
-            app:hintEnabled="false"
             app:counterEnabled="true"
             app:counterMaxLength="40"
+            app:errorEnabled="true"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="@+id/textViewEventName"
             app:layout_constraintStart_toStartOf="@+id/textViewEventName"
             app:layout_constraintTop_toBottomOf="@+id/textViewEventName">
@@ -48,10 +48,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hintEventName_cinema"
-                android:maxLength="40"/>
+                android:maxLength="40" />
         </com.google.android.material.textfield.TextInputLayout>
 
-<!-- Категория события-->
+        <!-- Категория события-->
         <TextView
             android:id="@+id/textViewEventCategory"
             android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
             app:layout_constraintEnd_toEndOf="@+id/textViewEventName"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textViewEventName"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEventName"/>
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEventName" />
 
 
         <RadioGroup
@@ -87,7 +87,7 @@
                 android:button="@android:color/transparent"
                 android:text="Прогулка"
                 android:textAlignment="center"
-                android:textColor="@drawable/radio_text_event_time" />
+                android:textColor="@drawable/radio_text" />
 
             <RadioButton
                 android:id="@+id/RadioBtCategory_Active"
@@ -99,7 +99,7 @@
                 android:button="@android:color/transparent"
                 android:text="Активный отдых"
                 android:textAlignment="center"
-                android:textColor="@drawable/radio_text_event_time" />
+                android:textColor="@drawable/radio_text" />
 
             <RadioButton
                 android:id="@+id/RadioBtCategory_Food"
@@ -111,7 +111,7 @@
                 android:button="@android:color/transparent"
                 android:text="Еда"
                 android:textAlignment="center"
-                android:textColor="@drawable/radio_text_event_time" />
+                android:textColor="@drawable/radio_text" />
 
             <RadioButton
                 android:id="@+id/RadioBtCategory_Culture"
@@ -123,7 +123,7 @@
                 android:button="@android:color/transparent"
                 android:text="Культура"
                 android:textAlignment="center"
-                android:textColor="@drawable/radio_text_event_time" />
+                android:textColor="@drawable/radio_text" />
 
             <RadioButton
                 android:id="@+id/RadioBtCategory_Travel"
@@ -135,20 +135,7 @@
                 android:button="@android:color/transparent"
                 android:text="Путешествия"
                 android:textAlignment="center"
-                android:textColor="@drawable/radio_text_event_time" />
-
-            <RadioButton
-                android:id="@+id/RadioBtCategory_Concerts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/radio_selector"
-                android:button="@android:color/transparent"
-                android:text="Концерты"
-                android:textAlignment="center"
-                android:textColor="@drawable/radio_text_event_time" />
-
+                android:textColor="@drawable/radio_text" />
 
             <RadioButton
                 android:id="@+id/RadioBtCategory_Study"
@@ -160,7 +147,19 @@
                 android:button="@android:color/transparent"
                 android:text="Образование"
                 android:textAlignment="center"
-                android:textColor="@drawable/radio_text_event_time" />
+                android:textColor="@drawable/radio_text" />
+
+            <RadioButton
+                android:id="@+id/RadioBtCategory_Company"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/radio_selector"
+                android:button="@android:color/transparent"
+                android:text="Посиделки"
+                android:textAlignment="center"
+                android:textColor="@drawable/radio_text" />
 
             <RadioButton
                 android:id="@+id/RadioBtCategory_Other"
@@ -170,10 +169,9 @@
                 android:layout_weight="1"
                 android:background="@drawable/radio_selector"
                 android:button="@android:color/transparent"
-                android:checked="true"
                 android:text="Другое"
                 android:textAlignment="center"
-                android:textColor="@drawable/radio_text_event_time" />
+                android:textColor="@drawable/radio_text" />
         </RadioGroup>
 
 <!-- Место события-->
@@ -181,16 +179,15 @@
             android:id="@+id/textViewEventRegion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/EventPlaceTitle"
             android:layout_marginTop="16dp"
+            android:text="@string/EventPlaceTitle"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/textViewEventCategory"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textViewEventCategory"
             app:layout_constraintTop_toBottomOf="@+id/radioGroupEventCategory" />
 
-        <RelativeLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/textInputLayoutEventPlace"
 
             android:layout_width="match_parent"
@@ -204,21 +201,11 @@
             app:layout_constraintStart_toStartOf="@+id/textViewEventRegion"
             app:layout_constraintTop_toBottomOf="@+id/textViewEventRegion">
 
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:id="@+id/cardView_eventPlace"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_marginRight="6dp"-->
-<!--                android:layout_marginTop="6dp"-->
-<!--                android:layout_marginLeft="6dp">-->
-
-
-                <fragment
-                    android:id="@+id/autocomplete_fragment"
-                    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-           <!--            </androidx.cardview.widget.CardView>-->
+            <fragment
+                android:id="@+id/autocomplete_fragment"
+                android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </RelativeLayout>
 <!-- Дата события-->
@@ -226,8 +213,8 @@
             android:id="@+id/textViewEventDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/EventDateTitle"
             android:layout_marginTop="16dp"
+            android:text="@string/EventDateTitle"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/textViewEventRegion"
             app:layout_constraintHorizontal_bias="0.0"
@@ -266,8 +253,8 @@
             android:id="@+id/textViewEventTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/EventTimeTitle"
             android:layout_marginTop="16dp"
+            android:text="@string/EventTimeTitle"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/textViewEventDate"
             app:layout_constraintHorizontal_bias="0.0"
@@ -305,7 +292,7 @@
                     android:button="@android:color/transparent"
                     android:text="@string/Morning"
                     android:textAlignment="center"
-                    android:textColor="@drawable/radio_text_event_time" />
+                    android:textColor="@drawable/radio_text" />
 
                 <RadioButton
                     android:id="@+id/RadioBtTimeDay"
@@ -317,7 +304,7 @@
                     android:button="@android:color/transparent"
                     android:text="@string/Day"
                     android:textAlignment="center"
-                    android:textColor="@drawable/radio_text_event_time" />
+                    android:textColor="@drawable/radio_text" />
 
                 <RadioButton
                     android:id="@+id/RadioBtTimeEvening"
@@ -329,7 +316,7 @@
                     android:button="@android:color/transparent"
                     android:text="@string/Evening"
                     android:textAlignment="center"
-                    android:textColor="@drawable/radio_text_event_time" />
+                    android:textColor="@drawable/radio_text" />
 
                 <RadioButton
                     android:id="@+id/RadioBtTimeNight"
@@ -341,7 +328,7 @@
                     android:button="@android:color/transparent"
                     android:text="@string/Night"
                     android:textAlignment="center"
-                    android:textColor="@drawable/radio_text_event_time" />
+                    android:textColor="@drawable/radio_text" />
 
                 <RadioButton
                     android:id="@+id/RadioBtTimeAny"
@@ -350,25 +337,12 @@
                     android:layout_weight="1"
                     android:background="@drawable/radio_selector"
                     android:button="@android:color/transparent"
-                    android:checked="true"
                     android:text="@string/TimeAny"
                     android:textAlignment="center"
-                    android:textColor="@drawable/radio_text_event_time" />
+                    android:textColor="@drawable/radio_text" />
             </RadioGroup>
         </LinearLayout>
 
-<!-- Количество участников-->
-        <!--        <TextView-->
-        <!--            android:id="@+id/textViewEventParticipantsCount"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="16dp"-->
-        <!--            android:text="Указать количество участников"-->
-        <!--            android:textSize="16sp"-->
-        <!--            app:layout_constraintEnd_toEndOf="@+id/textViewEventTime"-->
-        <!--            app:layout_constraintHorizontal_bias="0.0"-->
-        <!--            app:layout_constraintStart_toStartOf="@+id/textViewEventTime"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/linearLayout_Radio_EventTime" />-->
 
         <LinearLayout
             android:id="@+id/linearLayout_EventParticipantsCount"
@@ -383,21 +357,21 @@
             app:layout_constraintStart_toStartOf="@+id/textViewEventTime"
             app:layout_constraintTop_toBottomOf="@+id/textViewEventTime">
 
-        <Switch
-            android:id="@+id/switchEventParticipantsCount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="6dp"
-            android:backgroundTint="#FFFFFF"
-            android:text="@string/EventParticipantsCountTitle"
-            android:textColor="@color/gray_text_for_title_in_creating"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/textViewEventTime"
-            app:layout_constraintHorizontal_bias="0.082"
-            app:layout_constraintStart_toStartOf="@+id/textViewEventTime"
-            app:layout_constraintTop_toBottomOf="@+id/textViewEventTime"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
+            <Switch
+                android:id="@+id/switchEventParticipantsCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:backgroundTint="#FFFFFF"
+                android:text="@string/EventParticipantsCountTitle"
+                android:textColor="@color/gray_text_for_title_in_creating"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/textViewEventTime"
+                app:layout_constraintHorizontal_bias="0.082"
+                app:layout_constraintStart_toStartOf="@+id/textViewEventTime"
+                app:layout_constraintTop_toBottomOf="@+id/textViewEventTime"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -431,14 +405,15 @@
             android:id="@+id/textViewEventGender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:layout_marginStart="0dp"
+            android:layout_marginTop="4dp"
             android:text="@string/GenderTitle"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="@+id/textViewEventTime"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textViewEventTime"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout_EventParticipantsCount" />
+
         <LinearLayout
             android:id="@+id/linearLayout_Radio_Gender"
             android:layout_width="match_parent"
@@ -471,7 +446,7 @@
                     android:paddingHorizontal="@dimen/text_margin"
                     android:text="@string/GenderMale"
                     android:textAlignment="center"
-                    android:textColor="@drawable/radio_text_event_time" />
+                    android:textColor="@drawable/radio_text" />
 
                 <RadioButton
                     android:id="@+id/RadioBtGenderFemale"
@@ -484,7 +459,7 @@
                     android:paddingHorizontal="@dimen/text_margin"
                     android:text="@string/GenderFemale"
                     android:textAlignment="center"
-                    android:textColor="@drawable/radio_text_event_time" />
+                    android:textColor="@drawable/radio_text" />
 
                 <RadioButton
                     android:id="@+id/RadioBtGenderAny"
@@ -492,18 +467,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10dp"
                     android:layout_weight="1"
+                    android:background="@drawable/radio_selector"
+                    android:button="@android:color/transparent"
                     android:paddingHorizontal="@dimen/text_margin"
                     android:text="@string/GenderAny"
                     android:textAlignment="center"
-                    android:textColor="@drawable/radio_text_event_time"
-                    android:background="@drawable/radio_selector"
-                    android:button="@android:color/transparent"
-                    android:checked="true"/>
+                    android:textColor="@drawable/radio_text" />
 
             </RadioGroup>
         </LinearLayout>
 
-<!-- Описание события-->
+ <!-- Описание события-->
         <TextView
             android:id="@+id/textViewEventDetails"
             android:layout_width="wrap_content"
@@ -515,6 +489,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textViewEventGender"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout_Radio_Gender" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutEventDetails"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -543,27 +518,27 @@
             android:id="@+id/linearLayout_ButtonNext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEventDetails"
-            android:gravity="center">
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEventDetails">
 
             <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/bt_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="Далее"
-            android:background="@drawable/button_next">
+                android:id="@+id/bt_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/button_next"
+                android:text="Далее">
 
             </androidx.appcompat.widget.AppCompatButton>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="170dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="@+id/linearLayout_ButtonNext"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout_ButtonNext"
-            android:layout_marginTop="10dp">
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout_ButtonNext"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
