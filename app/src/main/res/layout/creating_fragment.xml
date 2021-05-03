@@ -170,6 +170,7 @@
                 android:background="@drawable/radio_selector"
                 android:button="@android:color/transparent"
                 android:text="Другое"
+                android:checked="true"
                 android:textAlignment="center"
                 android:textColor="@drawable/radio_text" />
         </RadioGroup>
@@ -339,6 +340,7 @@
                     android:button="@android:color/transparent"
                     android:text="@string/TimeAny"
                     android:textAlignment="center"
+                    android:checked="true"
                     android:textColor="@drawable/radio_text" />
             </RadioGroup>
         </LinearLayout>
@@ -471,6 +473,7 @@
                     android:button="@android:color/transparent"
                     android:paddingHorizontal="@dimen/text_margin"
                     android:text="@string/GenderAny"
+                    android:checked="true"
                     android:textAlignment="center"
                     android:textColor="@drawable/radio_text" />
 
