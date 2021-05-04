@@ -10,12 +10,12 @@ data class Events  (var name : String? = null, var date : String? = null, var ti
 }
 
 data class Places (var name : String? = null, var id : String? = null,
-                   var address : String? = null, var LatLng : pLatLng? = null)
+                   var address : String? = null, var LatLng : pLatLng? = null) : Serializable
 {
 
 }
 
-data class pLatLng(var longitude: Double? = null, var latitude: Double? = null)
+data class pLatLng(var longitude: Double? = null, var latitude: Double? = null) : Serializable
 {
 
 }

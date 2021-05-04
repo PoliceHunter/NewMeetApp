@@ -1,5 +1,6 @@
 package com.example.newmeetapp.ui.map
 
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.newmeetapp.R
+import com.example.newmeetapp.ui.eventInfo.EventInfo
 import com.example.newmeetapp.ui.events.Events
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -86,7 +88,7 @@ class MapsFragment : Fragment() {
                 if (eventArray != null) {
                     Toast.makeText(
                             requireContext(),
-                            "${marker.title} has been clicked ${eventArray.date}.",
+                            "Нажмите на название, чтобы перейти к событию",
                             Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -97,13 +99,9 @@ class MapsFragment : Fragment() {
             override fun onInfoWindowClick(marker: Marker) {
                val eventArray = marker.tag as? Events
 
-                if (eventArray != null) {
-                    Toast.makeText(
-                            requireContext(),
-                            "${marker.title} has been clicked ${eventArray.time}.",
-                            Toast.LENGTH_SHORT
-                    ).show()
-                }
+                val intent = Intent(requireContext(), EventInfo::class.java)
+                intent.putExtra("event", eventArray)
+                startActivity(intent)
             }
 
         })
