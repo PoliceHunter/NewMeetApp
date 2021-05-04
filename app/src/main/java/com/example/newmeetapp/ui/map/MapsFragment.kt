@@ -1,20 +1,19 @@
 package com.example.newmeetapp.ui.map
 
 import androidx.fragment.app.Fragment
-
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.example.newmeetapp.R
-
+import com.example.newmeetapp.ui.events.Events
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.google.firebase.database.*
 
 class MapsFragment : Fragment() {
@@ -23,6 +22,7 @@ class MapsFragment : Fragment() {
     private lateinit var mMap: GoogleMap
     private lateinit var databaseReference: DatabaseReference
     var database: FirebaseDatabase? = null
+    private lateinit var eventArrayList : ArrayList<Events>
 
 
     private val callback = OnMapReadyCallback { googleMap ->
@@ -42,37 +42,34 @@ class MapsFragment : Fragment() {
 
         mMap = googleMap
 
-        databaseReference.addValueEventListener(object: ValueEventListener
-        {
+        eventArrayList = arrayListOf<Events>()
+        databaseReference.addValueEventListener(object: ValueEventListener, GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowClickListener {
             override fun onDataChange(snapshot: DataSnapshot)
             {
                 if (snapshot.exists()) {
                     for (postSnapshot in snapshot.children) {
+                        var markerMap : Marker? = null
+                        val event = postSnapshot.getValue(Events::class.java)
+                        eventArrayList.add(event!!)
                         if (postSnapshot.child("place").exists()) {
 
-                            val etPlaceId = postSnapshot.child("place/id").value.toString()
-                            val etPlaceName = postSnapshot.child("place/name").value.toString()
-                            val etPlaceLat: Double =
-                                postSnapshot.child("place/LatLng/latitude").value as Double
-                            val etPlaceLng: Double =
-                                postSnapshot.child("place/LatLng/longitude").value as Double
-                            val etPlaceAddress =
-                                postSnapshot.child("place/address").value.toString()
-                            val moscowlog = LatLng(55.755826, 37.6173)
+                            val etPlaceLat: Double = event.place?.LatLng?.latitude!!
+                            val etPlaceLng: Double = event.place?.LatLng?.longitude!!
                             val etPlaceLatLng = LatLng(etPlaceLat, etPlaceLng)
-                            val nameMarker = postSnapshot.child("name").value.toString()
-                            Log.i("db reference info", "info ps - $postSnapshot,  ")
-                            Log.i(
-                                "get from bd",
-                                "Place: ${etPlaceName}, || $etPlaceLat - $etPlaceLng ,== $moscowlog  == $etPlaceLatLng||"
-                            )
-                            mMap = googleMap
-                            mMap.addMarker(
+                            val nameMarker = event.name
+                            markerMap = mMap.addMarker(
                                 MarkerOptions()
-                                    .position(etPlaceLatLng)
-                                    .title(nameMarker)
+                                        .icon(BitmapDescriptorFactory.defaultMarker(getColorMarker(event.category)))
+                                        .position(etPlaceLatLng)
+                                        .title(nameMarker)
+
                             )
                         }
+                        if (markerMap != null) {
+                            markerMap.tag = event
+                        }
+                        mMap.setOnMarkerClickListener(this)
+                        mMap.setOnInfoWindowClickListener(this)
                     }
                 }
             }
@@ -80,9 +77,65 @@ class MapsFragment : Fragment() {
             override fun onCancelled(error: DatabaseError) {
                 Log.d("Error access to db", "All bad")
             }
+
+            override fun onMarkerClick(marker: Marker): Boolean {
+
+                val eventArray = marker.tag as? Events
+
+                marker.showInfoWindow()
+                if (eventArray != null) {
+                    Toast.makeText(
+                            requireContext(),
+                            "${marker.title} has been clicked ${eventArray.date}.",
+                            Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                return false
+            }
+
+            override fun onInfoWindowClick(marker: Marker) {
+               val eventArray = marker.tag as? Events
+
+                if (eventArray != null) {
+                    Toast.makeText(
+                            requireContext(),
+                            "${marker.title} has been clicked ${eventArray.time}.",
+                            Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
         })
         val moscow = LatLng(55.7522, 37.6156)
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(moscow, 10f))
+    }
+
+    private fun getColorMarker(category: String?): Float {
+        if (category == "Прогулка") {
+            return BitmapDescriptorFactory.HUE_AZURE
+        }
+        if (category == "Активный отдых") {
+
+            return BitmapDescriptorFactory.HUE_CYAN
+        }
+        if (category == "Еда") {
+            return BitmapDescriptorFactory.HUE_MAGENTA
+        }
+        if (category == "Культура") {
+            return BitmapDescriptorFactory.HUE_RED
+        }
+        if (category == "Образование") {
+            return BitmapDescriptorFactory.HUE_VIOLET
+        }
+        if (category == "Посиделки") {
+            return BitmapDescriptorFactory.HUE_YELLOW
+        }
+        if (category == "Другое") {
+            return BitmapDescriptorFactory.HUE_GREEN
+        }
+
+        return BitmapDescriptorFactory.HUE_BLUE
     }
 
     override fun onCreateView(
