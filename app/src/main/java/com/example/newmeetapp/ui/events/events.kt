@@ -20,6 +20,7 @@ data class Events  (
         var admin : String? = null,
         var place : Places? = null,
         var adminInfo: user? = null,
+        var count_participants: String? = null,
         var participantsId: HashMap<String, String>? = null) : Serializable
 {
 

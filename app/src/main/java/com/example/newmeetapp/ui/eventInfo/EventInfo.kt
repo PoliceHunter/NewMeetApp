@@ -46,7 +46,6 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
         participantsForUsers = arrayListOf<user>()
         if (bundle != null) {
            // getAdminInfo(bundle.admin)
-
             eventNameInfoId.text = bundle.name
             eventCategoryInfoId.text = bundle.category
             eventDateTimeInfoId.text = "${bundle.time}  ${bundle.date}"
