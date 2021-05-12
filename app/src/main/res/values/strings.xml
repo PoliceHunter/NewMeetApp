@@ -36,4 +36,5 @@
     <string name="password">Пароль</string>
     <string name="repeat_password">Повторите пароль</string>
     <string name="sign_in">Войти</string>
+    <string name="Searching">Поиск...</string>
 </resources>
