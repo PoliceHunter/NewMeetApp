@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newmeetapp.R
 import com.example.newmeetapp.ui.events.Events
 import com.example.newmeetapp.ui.events.OnMemberListener
+import com.example.newmeetapp.ui.events.profileHash
 import com.example.newmeetapp.ui.events.user
 import com.example.newmeetapp.ui.profile.Profile
 import com.example.newmeetapp.ui.profile.ProfileOtherUser
@@ -19,6 +20,7 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.event_info.*
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 class EventInfo : AppCompatActivity(), OnMemberListener {
 
@@ -41,6 +43,8 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
         val currentUser = auth.currentUser!!.uid
         val bundle = intent.getSerializableExtra("event") as? Events
         etUnicalID = UUID.randomUUID()
+        participantsForAdmin = arrayListOf<user>()
+        participantsForUsers = arrayListOf<user>()
         if (bundle != null) {
            // getAdminInfo(bundle.admin)
 
@@ -65,18 +69,37 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
                 isWrite.get().addOnSuccessListener {
                     if (it.value == "true")
                         isWriteBool = true
+                    if (it.value == "false")
+                        isWriteBool = false
                     Log.i("firebase", "Got value ${it.value}")
+
                 }.addOnFailureListener{
-                    isWriteBool = false
                     Log.e("firebase", "Error getting data", it)
                 }
 
-                if (isWriteBool == null) {
-                    bt_go.setOnClickListener {
-                        databaseReference = FirebaseDatabase.getInstance().getReference("members/${bundle.id}/$currentUser")
+                bt_go.setOnClickListener {
+                    if (isWriteBool == null) {
+                        databaseReference = FirebaseDatabase.getInstance()
+                            .getReference("members/${bundle.id}/$currentUser")
                         databaseReference.setValue("false")
-                        Toast.makeText(this, "You will be added to this event", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "You will be added to this event", Toast.LENGTH_SHORT)
+                            .show()
+//                        val writeUser = FirebaseDatabase.getInstance().getReference("profile/$currentUser")
+//                        writeUser.get().addOnSuccessListener {
+//                            if (it.value != null) {
+//                                val hash : HashMap<String, String> = it.value as HashMap<String, String>
+//                                val us = user(firstname = hash["firstname"], lastname = hash["lastname"], id = hash["id"])
+//                                participantsForAdmin.add(us)
+//                                mRecyclerView.adapter = MembersAdapter(participantsForUsers, true, this@EventInfo)
+//                            }
+//                        }
                     }
+                    else if (isWriteBool == false)
+                        Toast.makeText(this, "You already added to this event. Wait to accept", Toast.LENGTH_SHORT)
+                            .show()
+                    else if (isWriteBool == true)
+                        Toast.makeText(this, "You participant this event", Toast.LENGTH_SHORT)
+                            .show()
                 }
             }
         }
@@ -85,37 +108,39 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
 
     override fun onStart() {
         super.onStart()
+//        val bundle = intent.getSerializableExtra("event") as? Events
+//        mRecyclerView = findViewById(R.id.membersRV)!!
+//
+//        mRecyclerView.layoutManager = LinearLayoutManager(this)
+//        mRecyclerView.setHasFixedSize(true)
+//        participantsForAdmin = arrayListOf<user>()
+//        participantsForUsers = arrayListOf<user>()
+//        getUsersData(bundle?.id)
+//
+    }
+
+    override fun onResume() {
+        super.onResume()
         val bundle = intent.getSerializableExtra("event") as? Events
         mRecyclerView = findViewById(R.id.membersRV)!!
 
         mRecyclerView.layoutManager = LinearLayoutManager(this)
         mRecyclerView.setHasFixedSize(true)
-        participantsForAdmin = arrayListOf<user>()
-        participantsForUsers = arrayListOf<user>()
         getUsersData(bundle?.id)
-        //mRecyclerView.adapter = MembersAdapter(participants, this)
-
-
-
-
     }
 
     private fun getUsersData(id: String?)
     {
         usersReference = FirebaseDatabase.getInstance().getReference("members/$id")
-        val userReference = FirebaseDatabase.getInstance().getReference("profile")
-        val bundle = intent.getSerializableExtra("event") as? Events
 
         usersReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (users in snapshot.children)
                 {
-                    val user = getUser(users.key, users.value)
-
+                    getUser(users.key, users.value)
                 }
 
             }
-
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
@@ -133,7 +158,7 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
         startActivity(intent)
     }
 
-    private fun getUser(key: String?, value: Any?): user? {
+    private fun getUser(key: String?, value: Any?) {
 
         val bundle = intent.getSerializableExtra("event") as? Events
         val userReference : DatabaseReference = FirebaseDatabase.getInstance().getReference("profile/$key")
@@ -164,7 +189,6 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
 
         })
 
-        return us
     }
 
 
