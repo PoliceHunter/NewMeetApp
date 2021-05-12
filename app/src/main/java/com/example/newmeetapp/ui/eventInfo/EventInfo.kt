@@ -2,9 +2,11 @@ package com.example.newmeetapp.ui.eventInfo
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View.GONE
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -48,10 +50,25 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
            // getAdminInfo(bundle.admin)
             eventNameInfoId.text = bundle.name
             eventCategoryInfoId.text = bundle.category
+            when (bundle.gender) {
+                "Женский" -> GenderMaleImageInfoId.visibility = GONE
+                "Мужской" -> GenderFemaleImageInfoId.visibility = GONE
+            }
+            NumberParticipantsInfoId.text = bundle.count_participants
             eventDateTimeInfoId.text = "${bundle.time}  ${bundle.date}"
             eventDescriptionInfoId.text = bundle.details
             OrgNameInfoId.text = "${bundle.adminInfo?.firstname} ${bundle.adminInfo?.lastname}"
             admin = bundle.admin!!
+            when (bundle.category) {
+                "Прогулка" -> layoutCategoryEventInfoId.setBackgroundColor(Resources.getSystem().getColor(R.color.blue_category_walk))
+                "Активный отдых" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.green_category_sport)!!)
+                "Еда" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.red_category_dinner)!!)
+                "Культура" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.purple_category_culture)!!)
+                "Путешествия" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.turquoise_category_travel)!!)
+                "Образование" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.lightBlue_category_study)!!)
+                "Посиделки" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.yellow_category_company)!!)
+                "Прочее" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.pink_category_other)!!)
+            }
             if (currentUser == bundle.admin)
             {
                 bt_go.setText("Настройки")
