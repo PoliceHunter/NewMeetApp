@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newmeetapp.R
 import com.example.newmeetapp.ui.events.Events
 import com.example.newmeetapp.ui.events.OnMemberListener
-import com.example.newmeetapp.ui.events.profileHash
 import com.example.newmeetapp.ui.events.user
 import com.example.newmeetapp.ui.profile.Profile
 import com.example.newmeetapp.ui.profile.ProfileOtherUser
