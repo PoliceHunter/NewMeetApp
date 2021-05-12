@@ -1,6 +1,7 @@
 package com.example.newmeetapp.ui.eventInfo
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,14 +10,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newmeetapp.R
 import com.example.newmeetapp.ui.events.Events
+import com.example.newmeetapp.ui.events.OnMemberListener
 import com.example.newmeetapp.ui.events.user
+import com.example.newmeetapp.ui.profile.Profile
+import com.example.newmeetapp.ui.profile.ProfileOtherUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.event_info.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class EventInfo : AppCompatActivity() {
+class EventInfo : AppCompatActivity(), OnMemberListener {
 
     lateinit var auth: FirebaseAuth
     private lateinit var databaseReference: DatabaseReference
@@ -24,7 +28,7 @@ class EventInfo : AppCompatActivity() {
     private lateinit var participantsForAdmin : ArrayList<user>
     private lateinit var participantsForUsers : ArrayList<user>
     lateinit var mRecyclerView : RecyclerView
-    lateinit var admin : user
+    lateinit var admin : String
     private lateinit var etUnicalID : UUID
 
 
@@ -45,6 +49,7 @@ class EventInfo : AppCompatActivity() {
             eventDateTimeInfoId.text = "${bundle.time}  ${bundle.date}"
             eventDescriptionInfoId.text = bundle.details
             OrgNameInfoId.text = "${bundle.adminInfo?.firstname} ${bundle.adminInfo?.lastname}"
+            admin = bundle.admin!!
             if (currentUser == bundle.admin)
             {
                 bt_go.setText("Настройки")
@@ -117,6 +122,17 @@ class EventInfo : AppCompatActivity() {
         })
     }
 
+    override fun onMemberClick(position: Int) {
+        super.onMemberClick(position)
+        val intent = Intent(this, ProfileOtherUser::class.java)
+
+        if (auth.currentUser!!.uid == admin) {
+            intent.putExtra("event", participantsForAdmin[position])
+        } else
+            intent.putExtra("event", participantsForUsers[position])
+        startActivity(intent)
+    }
+
     private fun getUser(key: String?, value: Any?): user? {
 
         val bundle = intent.getSerializableExtra("event") as? Events
@@ -134,14 +150,15 @@ class EventInfo : AppCompatActivity() {
                 if (bundle!!.admin == auth.currentUser!!.uid)
                 {
                     us?.let { participantsForAdmin.add(it) }
-                    mRecyclerView.adapter = MembersAdapter(participantsForAdmin,
-                        this)
+                    if (value == "false")
+                        mRecyclerView.adapter = MembersAdapter(participantsForAdmin, false, this@EventInfo)
+                    else
+                        mRecyclerView.adapter = MembersAdapter(participantsForAdmin, true, this@EventInfo)
                 }
                 else if (value == "true")
                 {
                     us?.let { participantsForUsers.add(it) }
-                    mRecyclerView.adapter = MembersAdapter(participantsForUsers,
-                            this)
+                    mRecyclerView.adapter = MembersAdapter(participantsForUsers, true, this@EventInfo)
                 }
             }
 
@@ -149,6 +166,8 @@ class EventInfo : AppCompatActivity() {
 
         return us
     }
+
+
 
 
 

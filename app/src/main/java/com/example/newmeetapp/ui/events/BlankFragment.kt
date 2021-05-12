@@ -30,9 +30,7 @@ class BlankFragment : Fragment(), OnEventListener {
     lateinit var mRecyclerView : RecyclerView
      lateinit var databaseReference: DatabaseReference
      lateinit var profileReference: DatabaseReference
-    lateinit var userReference : DatabaseReference
      lateinit var eventArrayList : ArrayList<Events>
-    private lateinit var usersArrayList: ArrayList<user>
     var database: FirebaseDatabase? = null
     lateinit var etValueEventListener : ValueEventListener
 

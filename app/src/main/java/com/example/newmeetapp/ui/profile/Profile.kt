@@ -1,6 +1,7 @@
 package com.example.newmeetapp.ui.profile
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.newmeetapp.R
+import com.example.newmeetapp.ui.eventInfo.EventInfo
+import com.example.newmeetapp.ui.events.Events
+import com.example.newmeetapp.ui.events.user
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -33,6 +37,7 @@ class Profile : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.profile_fragment, container, false)
     }
 
@@ -40,7 +45,6 @@ class Profile : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
-
         auth = FirebaseAuth.getInstance()
         getUserData()
         //nameId.text = "$firstname $lastname"

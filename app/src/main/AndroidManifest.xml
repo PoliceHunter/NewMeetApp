@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.newmeetapp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.eventInfo.EventInfo"></activity>
+        <activity android:name=".ui.profile.ProfileOtherUser"></activity>
+        <activity android:name=".ui.eventInfo.EventInfo" />
         <activity android:name=".ui.eventInfo.MainActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
