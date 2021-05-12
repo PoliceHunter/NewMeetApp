@@ -1,19 +1,17 @@
 package com.example.newmeetapp.ui.events
 
-import android.app.usage.UsageEvents
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newmeetapp.R
 import com.example.newmeetapp.ui.eventInfo.EventInfo
 import com.google.firebase.database.*
-import java.io.Serializable
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,9 +28,13 @@ class BlankFragment : Fragment(), OnEventListener {
     private var param1: String? = null
     private var param2: String? = null
     lateinit var mRecyclerView : RecyclerView
-    private lateinit var databaseReference: DatabaseReference
-    private lateinit var eventArrayList : ArrayList<Events>
+     lateinit var databaseReference: DatabaseReference
+     lateinit var profileReference: DatabaseReference
+    lateinit var userReference : DatabaseReference
+     lateinit var eventArrayList : ArrayList<Events>
+    private lateinit var usersArrayList: ArrayList<user>
     var database: FirebaseDatabase? = null
+    lateinit var etValueEventListener : ValueEventListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,30 +49,8 @@ class BlankFragment : Fragment(), OnEventListener {
         savedInstanceState: Bundle?
     ): View? {
 
+
         return inflater.inflate(R.layout.event_list_fragment, container, false)
-    }
-
-    private fun getEventsData()
-    {
-        databaseReference = FirebaseDatabase.getInstance().getReference("events")
-
-        databaseReference.addValueEventListener(object : ValueEventListener{
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()){
-                    for (eventSnapshot in snapshot.children)
-                    {
-                        val event = eventSnapshot.getValue(Events::class.java)
-                        eventArrayList.add(event!!)
-                    }
-                    mRecyclerView.adapter = MyAdapter(eventArrayList, this@BlankFragment)
-                }
-            }
-
-        })
     }
 
 
@@ -85,6 +65,52 @@ class BlankFragment : Fragment(), OnEventListener {
         getEventsData()
 
     }
+
+     fun getEventsData()
+    {
+        databaseReference = FirebaseDatabase.getInstance().getReference("events")
+        etValueEventListener = databaseReference.addValueEventListener(object : ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    var event : Events? = null
+                    for (eventSnapshot in snapshot.children)
+                    {
+                        event = eventSnapshot.getValue(Events::class.java)!!
+
+                        getAdminData(event)
+                        eventArrayList.add(event)
+                    }
+
+                    mRecyclerView.adapter = MyAdapter(eventArrayList, this@BlankFragment)
+                    databaseReference.removeEventListener(this)
+                }
+            }
+
+        })
+    }
+
+
+    fun getAdminData(event: Events)
+     {
+         database = FirebaseDatabase.getInstance()
+         profileReference = database?.reference!!.child("profile/${event.admin}")
+
+         profileReference.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val info = snapshot.getValue(user::class.java)
+                event.adminInfo = info
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
 
     override fun onEventClick(position: Int) {
         super.onEventClick(position)

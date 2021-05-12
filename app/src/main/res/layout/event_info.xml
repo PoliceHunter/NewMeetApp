@@ -229,5 +229,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider_2" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/membersRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="@layout/fragment_member"
+            app:layout_constraintTop_toBottomOf="@id/ParticipantsLabelId" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

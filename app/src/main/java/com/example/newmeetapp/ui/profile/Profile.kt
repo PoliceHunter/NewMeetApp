@@ -68,6 +68,7 @@ class Profile : Fragment() {
                 Log.d("Error access to db", "All bad")
             }
         })
+
     }
 
 }

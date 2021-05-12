@@ -53,6 +53,7 @@ class RegistrationActivity : AppCompatActivity(){
                                 val currentUserDb = databaseReference.child(currentUser?.uid!!)
                                 currentUserDb.child("firstname").setValue(firstnameInput.text.toString())
                                 currentUserDb.child("lastname").setValue(lastnameInput.text.toString())
+                                currentUserDb.child("id").setValue(currentUser.uid)
                                 Toast.makeText(this, "Registartion success!", Toast.LENGTH_SHORT).show()
                                 startActivity(Intent(this@RegistrationActivity, LoginActivity::class.java))
                                 finish()

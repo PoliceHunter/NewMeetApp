@@ -20,6 +20,7 @@ import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.creating_fragment.*
@@ -28,8 +29,8 @@ import kotlin.random.Random
 
 class Creating : Fragment() {
 
-    private lateinit var mMap: GoogleMap
     private lateinit var databaseReference: DatabaseReference
+    lateinit var auth: FirebaseAuth
     var etPlace: Place? = null
     var database: FirebaseDatabase? = null
     var radioTime: RadioButton? = null
@@ -66,6 +67,8 @@ class Creating : Fragment() {
         //DB connect
         database = FirebaseDatabase.getInstance()
         databaseReference = database?.reference!!.child("events")
+        auth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
         val apiKey = getString(R.string.api_key2)
 
         // 64-86 autocomplete
@@ -140,20 +143,25 @@ class Creating : Fragment() {
         bt_next.setOnClickListener {
             if (validation()) {
 
-                etUnicalID = UUID.randomUUID()
-                Log.d("Args which save to db", "time - ${radioTime?.text}, sex - ${radioSex?.text}, name - ${etEventName?.text}dd")
-                val currentUserDb = databaseReference.child(etUnicalID.toString())
+                val currentUserDb = databaseReference.push()
                 currentUserDb.child("name").setValue(etEventName?.text.toString())
                 currentUserDb.child("time").setValue(radioTime?.text.toString())
                 currentUserDb.child("gender").setValue(radioSex?.text.toString())
                 currentUserDb.child("date").setValue(eventDate?.text.toString())
                 currentUserDb.child("category").setValue(radioCategory?.text.toString())
-                currentUserDb.child("participants").setValue(textInputEditTextEventParticipantsCount.text.toString())
+                currentUserDb.child("count_participants").setValue(textInputEditTextEventParticipantsCount.text.toString())
                 currentUserDb.child("details").setValue(editText_eventDetails?.text.toString())
-                etPlace?.let { it1 -> savePlaceToDB(it1) }
+                currentUserDb.child("id").setValue(currentUserDb.key.toString())
+                currentUserDb.child("admin").setValue(currentUser?.uid)
+
+                etPlace?.let { it1 ->
+                    currentUserDb.child("place/name").setValue(it1.name)
+                    currentUserDb.child("place/id").setValue(it1.id)
+                    currentUserDb.child("place/LatLng").setValue(it1.latLng)
+                    currentUserDb.child("place/address").setValue(it1.address.toString())}
 
             }
-            goToInvitations(it)
+            //goToInvitations(it)
         }
     }
 
@@ -199,15 +207,6 @@ class Creating : Fragment() {
         return true
     }
 
-
-    private fun savePlaceToDB(place: Place) {
-        // for pathString for place need unical id
-        val currentUserDb = databaseReference.child("$etUnicalID/place")
-        currentUserDb.child("name").setValue(place.name)
-        currentUserDb.child("id").setValue(place.id)
-        currentUserDb.child("LatLng").setValue(place.latLng)
-        currentUserDb.child("address").setValue(place.address.toString())
-    }
 
     fun goToInvitations (view: View) {
         val btNext = view.findViewById<Button>(R.id.bt_next)
