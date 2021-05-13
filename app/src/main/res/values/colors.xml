@@ -10,10 +10,10 @@
     <color name="gray_textor_title_in_creating">#2CAFF1</color>
     <color name="red_category_dinner">#52FC573B</color>
     <color name="purple_category_culture">#65B27EFD</color>
-    <color name="lightBlue_category_study">#B79DECF9</color>
+    <color name="orange_category_study">#fbd8aa</color>
     <color name="yellow_category_company">#A9FFE777</color>
     <color name="green_category_sport">#D08CEB9F</color>
-    <color name="turquoise_category_travel">#8024C6C6</color>
-    <color name="blue_category_walk">#B96CB3FF</color>
+    <color name="turquoise_category_travel">#6A24C6C6</color>
+    <color name="blue_category_walk">#9E65A7ED</color>
     <color name="pink_category_other">#8DEB8CD8</color>
 </resources>

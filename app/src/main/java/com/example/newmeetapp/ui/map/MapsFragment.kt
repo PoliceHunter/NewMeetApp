@@ -111,29 +111,29 @@ class MapsFragment : Fragment() {
 
     private fun getColorMarker(category: String?): Float {
         if (category == "Прогулка") {
-            return BitmapDescriptorFactory.HUE_AZURE
+            return BitmapDescriptorFactory.HUE_BLUE
         }
         if (category == "Активный отдых") {
 
-            return BitmapDescriptorFactory.HUE_CYAN
+            return BitmapDescriptorFactory.HUE_GREEN
         }
         if (category == "Еда") {
-            return BitmapDescriptorFactory.HUE_MAGENTA
-        }
-        if (category == "Культура") {
             return BitmapDescriptorFactory.HUE_RED
         }
-        if (category == "Образование") {
+        if (category == "Культура") {
             return BitmapDescriptorFactory.HUE_VIOLET
+        }
+        if (category == "Образование") {
+            return BitmapDescriptorFactory.HUE_ORANGE
         }
         if (category == "Посиделки") {
             return BitmapDescriptorFactory.HUE_YELLOW
         }
-        if (category == "Другое") {
-            return BitmapDescriptorFactory.HUE_GREEN
+        if (category == "Путешествия") {
+            return BitmapDescriptorFactory.HUE_CYAN
         }
 
-        return BitmapDescriptorFactory.HUE_BLUE
+        return BitmapDescriptorFactory.HUE_ROSE
     }
 
     override fun onCreateView(

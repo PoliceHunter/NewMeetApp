@@ -64,7 +64,7 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
                 "Еда" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.red_category_dinner)!!)
                 "Культура" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.purple_category_culture)!!)
                 "Путешествия" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.turquoise_category_travel)!!)
-                "Образование" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.lightBlue_category_study)!!)
+                "Образование" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.orange_category_study)!!)
                 "Посиделки" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.yellow_category_company)!!)
                 "Прочее" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.pink_category_other)!!)
             }
