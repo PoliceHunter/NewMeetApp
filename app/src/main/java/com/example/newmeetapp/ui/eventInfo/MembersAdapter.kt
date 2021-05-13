@@ -11,14 +11,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.newmeetapp.R
 import com.example.newmeetapp.ui.events.OnEventListener
 import com.example.newmeetapp.ui.events.OnMemberListener
+import com.example.newmeetapp.ui.events.inRelative
 import com.example.newmeetapp.ui.events.user
 import com.google.firebase.database.ValueEventListener
 
-class MembersAdapter(private val userList: ArrayList<user>, private val visibility : Boolean,
+class MembersAdapter(private val userList: ArrayList<inRelative>,
                      private val onMemberListener: OnMemberListener) : RecyclerView.Adapter<MembersAdapter.MyViewHolder>() {
 
-    var vis = visibility
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+
 
 
         val itemView = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
@@ -27,10 +28,11 @@ class MembersAdapter(private val userList: ArrayList<user>, private val visibili
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (visibility)
-            R.layout.fragment_member
-        else
-            R.layout.fragment_member_accept
+       return R.layout.fragment_member_accept
+//        return if (visibility)
+//            R.layout.fragment_member
+//        else
+//            R.layout.fragment_member_accept
 
 
     }
@@ -43,18 +45,32 @@ class MembersAdapter(private val userList: ArrayList<user>, private val visibili
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = userList[position]
 
-        holder.dName.text = currentItem.firstname + currentItem.lastname
+        holder.dName.text = currentItem.User.firstname + currentItem.User.lastname
 
-//        if (!visibility)
-//        {
-//            holder.dBtAccept.visibility = 1
-//            holder.dBtDeni.visibility = 1
+//        holder.remove.setOnClickListener {
+//            val db = DataBaseHandler(this)
+//            if(db.deleteData(credential.id)){
+//                notifyItemRemoved(holder.getAdapterPosition())
+//            }
 //        }
-//        else
-//        {
-//            holder.dBtAccept.visibility = 0
-//            holder.dBtDeni.visibility = 0
-//        }
+
+        if (!currentItem.value)
+        {
+            holder.dBtAccept.visibility = View.VISIBLE
+            holder.dBtDeni.visibility = View.VISIBLE
+            holder.dBtDeni.setOnClickListener {
+                onMemberListener.onDeleteMember(position)
+                notifyItemRemoved(position)
+            }
+            holder.dBtAccept.setOnClickListener {
+                onMemberListener.onAcceptMember(position)
+                notifyItemChanged(position)
+            }
+        }
+        else
+        {
+            holder.dBtAccept.visibility = View.GONE
+        }
 
         holder.itemView.setOnClickListener{
             onMemberListener.onMemberClick(position)
@@ -64,9 +80,11 @@ class MembersAdapter(private val userList: ArrayList<user>, private val visibili
 
 
     class MyViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+
+
         val dName : TextView = itemView.findViewById(R.id.members_TextRV)
-//        val dBtAccept : Button = itemView.findViewById(R.id.buttonAccept)
-//        val dBtDeni : Button = itemView.findViewById(R.id.buttonDeni)
+        val dBtAccept : Button = itemView.findViewById(R.id.buttonAccept)
+        val dBtDeni : Button = itemView.findViewById(R.id.buttonDeni)
 
     }
 }

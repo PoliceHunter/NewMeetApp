@@ -115,6 +115,7 @@ class BlankFragment : Fragment(), OnEventListener {
 
         val intent = Intent(requireContext(), EventInfo::class.java)
         intent.putExtra("event", eventArrayList[position])
+
         startActivity(intent)
     }
 

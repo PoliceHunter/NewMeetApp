@@ -42,6 +42,9 @@ data class pLatLng(var longitude: Double? = null, var latitude: Double? = null) 
 
 }
 
+//data class toRelative(var data: ArrayList<inRelative>) : Serializable
+
+data class inRelative(var User: user, var value: Boolean, var idEvent : String) : Serializable
 
 data class user(var firstname : String? = null, var lastname: String? = null, var id: String? = null) : Serializable
 {
