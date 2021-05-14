@@ -13,15 +13,19 @@ import com.example.newmeetapp.ui.events.OnEventListener
 import com.example.newmeetapp.ui.events.OnMemberListener
 import com.example.newmeetapp.ui.events.inRelative
 import com.example.newmeetapp.ui.events.user
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ValueEventListener
 
 class MembersAdapter(private val userList: ArrayList<inRelative>,
-                     private val onMemberListener: OnMemberListener) : RecyclerView.Adapter<MembersAdapter.MyViewHolder>() {
+                     private val adminId : String,
+                     private val onMemberListener: OnMemberListener) : RecyclerView.Adapter<MembersAdapter.MyViewHolder>()
+{
+
+    private var auth : FirebaseAuth? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
-
-
+        auth = FirebaseAuth.getInstance()
         val itemView = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
 
         return MyViewHolder(itemView)
@@ -69,6 +73,8 @@ class MembersAdapter(private val userList: ArrayList<inRelative>,
         }
         else
         {
+            if (adminId != auth?.currentUser!!.uid)
+                holder.dBtDeni.visibility = View.GONE
             holder.dBtAccept.visibility = View.GONE
         }
 
@@ -80,12 +86,9 @@ class MembersAdapter(private val userList: ArrayList<inRelative>,
 
 
     class MyViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-
-
         val dName : TextView = itemView.findViewById(R.id.members_TextRV)
         val dBtAccept : Button = itemView.findViewById(R.id.buttonAccept)
         val dBtDeni : Button = itemView.findViewById(R.id.buttonDeni)
-
     }
 }
 
