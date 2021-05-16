@@ -58,18 +58,19 @@ class MembersAdapter(private val userList: ArrayList<inRelative>,
 //            }
 //        }
 
+        holder.dBtDeni.setOnClickListener {
+            onMemberListener.onDeleteMember(position)
+            notifyItemRemoved(position)
+        }
+        holder.dBtAccept.setOnClickListener {
+            onMemberListener.onAcceptMember(position)
+            notifyItemChanged(position)
+        }
         if (!currentItem.value)
         {
             holder.dBtAccept.visibility = View.VISIBLE
             holder.dBtDeni.visibility = View.VISIBLE
-            holder.dBtDeni.setOnClickListener {
-                onMemberListener.onDeleteMember(position)
-                notifyItemRemoved(position)
-            }
-            holder.dBtAccept.setOnClickListener {
-                onMemberListener.onAcceptMember(position)
-                notifyItemChanged(position)
-            }
+
         }
         else
         {

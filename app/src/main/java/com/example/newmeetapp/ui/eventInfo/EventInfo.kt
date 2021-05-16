@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View.GONE
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newmeetapp.R
 import com.example.newmeetapp.ui.events.*
+import com.example.newmeetapp.ui.manageevent.manageEvent
 import com.example.newmeetapp.ui.profile.ProfileOtherUser
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -87,6 +89,8 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
             {
                 bt_go.setText("Управлять")
                 bt_go.setOnClickListener{
+                    val intent = Intent(this, manageEvent::class.java)
+                    startActivity(intent)
                     Toast.makeText(this, "You are admin this event", Toast.LENGTH_SHORT).show()
                 }
 
