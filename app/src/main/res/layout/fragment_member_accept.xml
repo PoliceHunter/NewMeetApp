@@ -36,37 +36,33 @@
                     android:layout_width="221dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="6dp"
                     android:textAppearance="?attr/textAppearanceListItem"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/eventCategory_ImageId"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Пойти погулять в Парке Горького и поесть" />
+                    tools:text="Имя участника" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/buttonAccept"
                     style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_marginTop="15dp"
-
                     android:visibility="visible"
-                    app:icon="@drawable/quantum_ic_arrow_back_grey600_24"
-                    app:iconTint="#0AF114" />
+                    android:background="@drawable/ic_check"/>
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/buttonDeni"
                     style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="45dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="5dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="15dp"
-
                     android:visibility="visible"
-                    app:icon="@drawable/quantum_ic_clear_grey600_24"
-                    app:iconTint="#FF0000" />
+                    android:background="@drawable/ic_cancel" />
 
             </LinearLayout>
 
