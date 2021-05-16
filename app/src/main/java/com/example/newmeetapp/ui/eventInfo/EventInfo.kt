@@ -8,11 +8,16 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View.GONE
 import android.widget.Toast
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newmeetapp.R
 import com.example.newmeetapp.ui.events.*
 import com.example.newmeetapp.ui.profile.ProfileOtherUser
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.event_info.*
@@ -42,6 +47,18 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
         val bundle = intent.getSerializableExtra("event") as? Events
         etUnicalID = UUID.randomUUID()
 
+//        val navView: BottomNavigationView = findViewById(R.id.nav_view2)
+//        val navController = findNavController(R.id.nav_host_fragment)
+//        // Passing each menu ID as a set of Ids because each
+//        // menu should be considered as top level destinations.
+//        val appBarConfiguration = AppBarConfiguration(setOf(
+//                R.id.navigation_search,
+//                R.id.navigation_mapsFragment,
+//                R.id.navigation_creating,
+//                R.id.navigation_notifications,
+//                R.id.navigation_profile))
+//        setupActionBarWithNavController(navController, appBarConfiguration)
+//        navView.setupWithNavController(navController)
 
         if (bundle != null) {
            // getAdminInfo(bundle.admin)
@@ -57,7 +74,7 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
             OrgNameInfoId.text = "${bundle.adminInfo?.firstname} ${bundle.adminInfo?.lastname}"
             admin = bundle.admin!!
             when (bundle.category) {
-                "Прогулка" -> layoutCategoryEventInfoId.setBackgroundColor(Resources.getSystem().getColor(R.color.blue_category_walk))
+                "Прогулка" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.blue_category_walk)!!)
                 "Активный отдых" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.green_category_sport)!!)
                 "Еда" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.red_category_dinner)!!)
                 "Культура" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.purple_category_culture)!!)
@@ -68,7 +85,7 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
             }
             if (currentUser == bundle.admin)
             {
-                bt_go.setText("Настройки")
+                bt_go.setText("Управлять")
                 bt_go.setOnClickListener{
                     Toast.makeText(this, "You are admin this event", Toast.LENGTH_SHORT).show()
                 }
@@ -95,7 +112,7 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
                             databaseReference = FirebaseDatabase.getInstance()
                                     .getReference("members/${bundle.id}/$currentUser")
                             databaseReference.setValue("false")
-                            Toast.makeText(this, "You will be added to this event", Toast.LENGTH_SHORT)
+                            Toast.makeText(this, "Ваша заявка отправлена!", Toast.LENGTH_SHORT)
                                     .show()
                         }
                         false -> Toast.makeText(this, "You already added to this event. Wait to accept", Toast.LENGTH_SHORT)
@@ -107,6 +124,7 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
             }
         }
     }
+
 
 
     override fun onStart() {

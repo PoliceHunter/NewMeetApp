@@ -49,7 +49,7 @@ class MembersAdapter(private val userList: ArrayList<inRelative>,
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = userList[position]
 
-        holder.dName.text = currentItem.User.firstname + currentItem.User.lastname
+        holder.dName.text = currentItem.User.firstname + " " + currentItem.User.lastname
 
 //        holder.remove.setOnClickListener {
 //            val db = DataBaseHandler(this)

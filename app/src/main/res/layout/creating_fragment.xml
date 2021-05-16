@@ -513,7 +513,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ems="10"
-                android:hint="Здесь можно/нужно оставить более подробную информацию о событии"
+                android:hint="Здесь можно оставить более подробную информацию о событии"
                 android:inputType="textMultiLine" />
         </com.google.android.material.textfield.TextInputLayout>
 
