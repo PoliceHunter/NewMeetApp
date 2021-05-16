@@ -22,11 +22,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/AvatarId"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewAvatarId"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_marginTop="4dp" />
+                android:innerRadius="0dp"
+                android:layout_marginTop="6dp"
+                android:shape="ring"
+                android:thicknessRatio="1.9"
+                app:cardCornerRadius="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.083"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/OrgLabelId">
+
+                <ImageView
+                    android:id="@+id/OrgAvatarInfoId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/test_avatar" />
+
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:id="@+id/linearLayoutWithNameCity"
@@ -286,6 +302,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/calendarButtonsLayoutId"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
@@ -339,7 +356,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/ic_favourite_event">
+                android:background="@drawable/ic_favourite_event_filled">
 
             </androidx.appcompat.widget.AppCompatButton>
 
@@ -349,6 +366,20 @@
                 android:layout_weight="1" />
 
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:text="У Вас еще нет избранных мероприятий"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/calendarButtonsLayoutId"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
