@@ -129,7 +129,17 @@ class Creating : Fragment() {
         eventDate.setOnClickListener {
             val dpd = DatePickerDialog(requireContext(), DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
                 //set to TextView
-                eventDate.setText(""+ mDay + "." + (mMonth + 1) + "." + mYear)
+                var textmDay : String = mDay.toString()
+                var textmMonth : String = (mMonth + 1).toString()
+                if (mDay in 1..9)
+                {
+                   textmDay  = "0$mDay"
+                }
+                if (mMonth in 0..8)
+                {
+                    textmMonth = "0${mMonth + 1}"
+                }
+                eventDate.setText(""+ textmDay + "." + textmMonth + "." + mYear)
             }, year, month, day)
             dpd.show()
             dpd.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#2CAFF1"))
@@ -149,7 +159,11 @@ class Creating : Fragment() {
                 currentUserDb.child("gender").setValue(radioSex?.text.toString())
                 currentUserDb.child("date").setValue(eventDate?.text.toString())
                 currentUserDb.child("category").setValue(radioCategory?.text.toString())
-                currentUserDb.child("count_participants").setValue(textInputEditTextEventParticipantsCount.text.toString())
+//                if (textInputEditTextEventParticipantsCount.text!!.isEmpty()) {
+//                    currentUserDb.child("count_participants").setValue("-1")
+//                }
+//                else
+                    currentUserDb.child("count_participants").setValue(textInputEditTextEventParticipantsCount.text.toString())
                 currentUserDb.child("details").setValue(editText_eventDetails?.text.toString())
                 currentUserDb.child("id").setValue(currentUserDb.key.toString())
                 currentUserDb.child("admin").setValue(currentUser?.uid)
