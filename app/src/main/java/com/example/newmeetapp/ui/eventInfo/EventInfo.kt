@@ -12,14 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newmeetapp.R
 import com.example.newmeetapp.ui.events.*
-import com.example.newmeetapp.ui.profile.Profile
 import com.example.newmeetapp.ui.profile.ProfileOtherUser
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.event_info.*
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 class EventInfo : AppCompatActivity(), OnMemberListener {
 
@@ -115,53 +113,30 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
         super.onStart()
 
         val bundle = intent.getSerializableExtra("event") as? Events
-        mRecyclerView = findViewById(R.id.membersRV)!!
+        mRecyclerView = findViewById(R.id.membersRV)
 
         mRecyclerView.layoutManager = LinearLayoutManager(this)
         mRecyclerView.setHasFixedSize(true)
-        participantsForAdminToRelative = arrayListOf()
-        participantsForUsersToRelative = arrayListOf()
         getUsersData(bundle!!.id)
 
     }
-
 
 
     private fun getUsersData(id: String?)
     {
         usersReference = FirebaseDatabase.getInstance().getReference("members/$id")
 
-        usersReference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (users in snapshot.children)
-                {
-                    getUser(users.key, users.value, id)
-                }
-//                toRelativeFun()
 
+        usersReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot)
+            {
+                getUser(snapshot.children, id)
             }
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
         })
     }
-
-//    private fun toRelativeFun()
-//    {
-//        usersReference = FirebaseDatabase.getInstance().getReference("members/")
-//
-//        usersReference.addValueEventListener(object : ValueEventListener {
-//            override fun onDataChange(snapshot: DataSnapshot) {
-//                if (auth.currentUser!!.uid == admin)
-//                    mRecyclerView.adapter = MembersAdapter(participantsForAdminToRelative, this@EventInfo)
-//                else
-//                    mRecyclerView.adapter = MembersAdapter(participantsForUsersToRelative, this@EventInfo)
-//            }
-//            override fun onCancelled(error: DatabaseError) {
-//                TODO("Not yet implemented")
-//            }
-//        })
-//    }
 
     override fun onDeleteMember(position: Int)
     {
@@ -170,7 +145,7 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
                 .getReference("members/${participantsForAdminToRelative[position].idEvent}/" +
                         "${participantsForAdminToRelative[position].User.id}")
         db.removeValue()
-        participantsForAdminToRelative.removeAt(position)
+        //participantsForAdminToRelative.removeAt(position)
 
         //updateMembers(participantsForAdminToRelative)
     }
@@ -181,7 +156,7 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
                 .getReference("members/${participantsForAdminToRelative[position].idEvent}/" +
                         "${participantsForAdminToRelative[position].User.id}")
         db.setValue("true")
-        participantsForAdminToRelative[position].value = true
+      //  participantsForAdminToRelative[position].value = true
         //updateMembers(participantsForAdminToRelative)
     }
 
@@ -197,34 +172,40 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
     }
 
 
-    private fun getUser(key: String?, value: Any?, id: String?) {
-        val userReference: DatabaseReference = FirebaseDatabase.getInstance().getReference("profile/$key")
-        var us: user? = null
+    @SuppressLint("LongLogTag")
+    private fun getUser(
+        data: MutableIterable<DataSnapshot>,
+        id: String?
+    ) {
+        val userReference: DatabaseReference = FirebaseDatabase.getInstance().getReference("profile")
 
-        userReference.addValueEventListener(object : ValueEventListener {
+        userReference.addValueEventListener(object : ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                us = snapshot.getValue(user::class.java)
-
-                var data: inRelative? = null
-                val tmp: Boolean = value == "true"
-                if (us != null)
-                    data = inRelative(value = tmp, User = us!!, idEvent = id!!)
-                if (admin == auth.currentUser!!.uid && data != null) {
-                    participantsForAdminToRelative.add(data)
-                } else if (value == "true" && admin != auth.currentUser!!.uid && data != null) {
-                    participantsForUsersToRelative.add(data)
+                participantsForAdminToRelative = arrayListOf()
+                participantsForUsersToRelative = arrayListOf()
+                for (i in data) {
+                    var result: inRelative? = null
+                    val us = snapshot.child("${i.key}").getValue<user>(user::class.java)
+                    val visible: Boolean = i.value == "true"
+                    result = inRelative(User = us!!, value = visible, idEvent = id!!)
+                    if (admin == auth.currentUser!!.uid)
+                        participantsForAdminToRelative.add(result)
+                    else if (i.value == "true" && admin != auth.currentUser!!.uid)
+                        participantsForUsersToRelative.add(result)
                 }
                 if (auth.currentUser!!.uid == admin)
-                    mRecyclerView.adapter = MembersAdapter(participantsForAdminToRelative, this@EventInfo)
+                    mRecyclerView.adapter = MembersAdapter(participantsForAdminToRelative, admin,this@EventInfo)
                 else
-                    mRecyclerView.adapter = MembersAdapter(participantsForUsersToRelative, this@EventInfo)
+                    mRecyclerView.adapter = MembersAdapter(participantsForUsersToRelative, admin, this@EventInfo)
+                (mRecyclerView.adapter as MembersAdapter).notifyDataSetChanged()
             }
 
         })
+
 
         ///TODO Переписать без слушателя
     }
