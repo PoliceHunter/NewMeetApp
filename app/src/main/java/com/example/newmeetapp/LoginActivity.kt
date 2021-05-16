@@ -36,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
                         } else {
                             Toast.makeText(
                                 this@LoginActivity,
-                                "Email or Password didn't match",
+                                "Указан неверный email или пароль",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -50,21 +50,21 @@ class LoginActivity : AppCompatActivity() {
     {
         if (TextUtils.isEmpty(emailLoginInput.text.toString()))
         {
-            emailLoginInput.error = "Please enter email"
+            emailLoginInput.error = "Введите Ваш email"
             return false
         }
         else if (TextUtils.isEmpty(passwordLoginInput.text.toString()))
         {
-            passwordLoginInput.error = "Please password"
+            passwordLoginInput.error = "Введите пароль"
             return false
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(emailLoginInput.text.toString()).matches()) {
-            emailLoginInput.error = "Please Enter Valid Email"
+            emailLoginInput.error = "Введите корректный email"
             return false
         }
         if (emailLoginInput.text.toString().split('@')[1] != "gmail.com")
         {
-            emailLoginInput.error = "Please Enter corporation Email"
+            emailLoginInput.error = "Введите Вашу корпоративную почту"
             return false
         }
         return true

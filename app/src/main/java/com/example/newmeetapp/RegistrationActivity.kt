@@ -54,12 +54,12 @@ class RegistrationActivity : AppCompatActivity(){
                                 currentUserDb.child("firstname").setValue(firstnameInput.text.toString())
                                 currentUserDb.child("lastname").setValue(lastnameInput.text.toString())
                                 currentUserDb.child("id").setValue(currentUser.uid)
-                                Toast.makeText(this, "Registartion success!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Вы успешно зарегистрировались!", Toast.LENGTH_SHORT).show()
                                 startActivity(Intent(this@RegistrationActivity, LoginActivity::class.java))
                                 finish()
                             } else {
                                 Log.w("createUserWithEmail:failure", it.exception)
-                                Toast.makeText(this@RegistrationActivity, "Registartion failed, please try again", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@RegistrationActivity, "Регистрация не удалась, пожалуйста, попробуйте ещё раз!", Toast.LENGTH_SHORT).show()
                             }
                         }
             }
@@ -72,41 +72,41 @@ class RegistrationActivity : AppCompatActivity(){
 
         if (TextUtils.isEmpty(firstnameInput.text.toString()))
         {
-            firstnameInput.error = "Please enter first name"
+            firstnameInput.error = "Введите Ваше имя"
             return false
         }
 
         else if (TextUtils.isEmpty(lastnameInput.text.toString()))
         {
-            lastnameInput.error = "Please enter last name"
+            lastnameInput.error = "Введите Вашу фамилию"
             return false
         }
         else if (TextUtils.isEmpty(emailInput.text.toString()))
         {
-            emailInput.error = "Please enter email"
+            emailInput.error = "Введите Ваш email"
             return false
         }
         else if (TextUtils.isEmpty(passwordInput.text.toString()))
         {
-            passwordInput.error = "Please password"
+            passwordInput.error = "Введите пароль"
             return false
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(emailInput.text.toString()).matches()) {
-            emailInput.error = "Please Enter Valid Email"
+            emailInput.error = "Введите корректный email"
             return false
         }
         if (emailInput.text.toString().split('@')[1] != "gmail.com")
         {
-            emailInput.error = "Please Enter corporation Email"
+            emailInput.error = "Введите Вашу корпоративную почту"
             return false
         }
         if (passwordInput.text.toString().length < MIN_PASSWORD_LENGTH) {
-            passwordInput.error = "Password Length must be more than " + MIN_PASSWORD_LENGTH + "characters"
+            passwordInput.error = "Пароль должен содержать не менее " + MIN_PASSWORD_LENGTH + " символов"
             return false
         }
         if (passwordInput.text.toString() != repeatpasswordInput.text.toString())
         {
-            repeatpasswordInput.error = "Password does not match"
+            repeatpasswordInput.error = "Пароли не совпадают"
             return false
         }
         return true
