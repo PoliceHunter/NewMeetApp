@@ -7,8 +7,13 @@
     tools:context=".ui.eventInfo.EventInfo">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/eventInfoLayoutId"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/layoutCategoryEventInfoId"
@@ -85,6 +90,7 @@
                 android:background="@drawable/ic_favourite_event" />
 
         </LinearLayout>
+
         <TextView
             android:id="@+id/eventDateTimeInfoId"
             android:layout_width="wrap_content"
@@ -119,13 +125,14 @@
                 android:layout_marginTop="2dp"
                 android:background="@drawable/ic_baseline_people_24"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/NumberParticipantsInfoId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5"
                 android:layout_marginStart="6dp"
+                android:text="5"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -143,7 +150,8 @@
                 android:layout_marginTop="2dp"
                 android:background="@drawable/ic_male"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/GenderFemaleImageInfoId"
                 android:layout_width="24dp"
@@ -153,6 +161,7 @@
                 android:background="@drawable/ic_female"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <Space
                 android:layout_width="0dp"
                 android:layout_height="1dp"
@@ -226,14 +235,11 @@
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginBottom="100dp"
+            android:layout_marginTop="20dp"
             android:background="@color/darkBlue_Standard"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutButtonsEventInfoId"
-            app:layout_constraintVertical_bias="0.076" />
+            app:layout_constraintTop_toBottomOf="@+id/layoutButtonsEventInfoId" />
 
         <TextView
             android:id="@+id/OrgLabelId"
@@ -273,15 +279,11 @@
             android:id="@+id/divider_2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginBottom="100dp"
+            android:layout_marginTop="120dp"
             android:background="@color/darkBlue_Standard"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/divider"
-            app:layout_constraintVertical_bias="0.348" />
+            app:layout_constraintTop_toTopOf="@+id/divider" />
 
         <TextView
             android:id="@+id/ParticipantsLabelId"
@@ -301,9 +303,8 @@
             android:layout_marginStart="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
             app:layout_constraintTop_toBottomOf="@id/ParticipantsLabelId" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

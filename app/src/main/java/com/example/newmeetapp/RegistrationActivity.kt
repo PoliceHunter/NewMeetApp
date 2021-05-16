@@ -9,13 +9,16 @@ import android.util.Patterns
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Switch
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_registration.*
+import kotlinx.android.synthetic.main.creating_fragment.*
 import org.w3c.dom.Text
 
 
@@ -53,6 +56,13 @@ class RegistrationActivity : AppCompatActivity(){
                                 val currentUserDb = databaseReference.child(currentUser?.uid!!)
                                 currentUserDb.child("firstname").setValue(firstnameInput.text.toString())
                                 currentUserDb.child("lastname").setValue(lastnameInput.text.toString())
+                                currentUserDb.child("city").setValue(cityInput.text.toString())
+                                currentUserDb.child("birthday").setValue(birthdayInput.text.toString())
+                                currentUserDb.child("phone").setValue(phoneInput.text.toString())
+                                currentUserDb.child("telegram").setValue(telegramInput.text.toString())
+                                currentUserDb.child("instagram").setValue(instagramInput.text.toString())
+                                currentUserDb.child("vk").setValue(VKInput.text.toString())
+                                currentUserDb.child("about").setValue(editText_about.text.toString())
                                 currentUserDb.child("id").setValue(currentUser.uid)
                                 Toast.makeText(this, "Вы успешно зарегистрировались!", Toast.LENGTH_SHORT).show()
                                 startActivity(Intent(this@RegistrationActivity, LoginActivity::class.java))

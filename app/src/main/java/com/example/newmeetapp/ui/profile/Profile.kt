@@ -30,6 +30,13 @@ class Profile : Fragment() {
     private lateinit var databaseReference: DatabaseReference
     private var firstname : String? = null
     private var lastname : String? = null
+    private var city : String? = null
+    private var about : String? = null
+    private var birthday : String? = null
+    private var phone : String? = null
+    private var telegram : String? = null
+    private var instagram : String? = null
+    private var vk : String? = null
     var database: FirebaseDatabase? = null
 
 
@@ -66,6 +73,13 @@ class Profile : Fragment() {
                 firstname = snapshot.child("firstname").value.toString()
                 lastname = snapshot.child("lastname").value.toString()
                 nameId.text = "$firstname $lastname"
+                CityId.text = snapshot.child("city").value.toString()
+                AboutId.text = snapshot.child("about").value.toString()
+                BirthDayId.text = snapshot.child("birthday").value.toString()
+                PhoneId.text = snapshot.child("phone").value.toString()
+                TelegramId.text = snapshot.child("telegram").value.toString()
+                InstagramId.text = snapshot.child("instagram").value?.toString()
+                VkId.text = snapshot.child("vk").value.toString()
             }
 
             override fun onCancelled(error: DatabaseError) {
