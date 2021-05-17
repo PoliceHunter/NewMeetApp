@@ -1,7 +1,6 @@
 package com.example.newmeetapp.ui.profile
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -10,11 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.newmeetapp.R
-import com.example.newmeetapp.ui.eventInfo.EventInfo
-import com.example.newmeetapp.ui.events.Events
-import com.example.newmeetapp.ui.events.user
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.profile_fragment.*
@@ -48,16 +42,51 @@ class Profile : Fragment() {
         return inflater.inflate(R.layout.profile_fragment, container, false)
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        //val nFragment = fragmentManager?.findFragmentById(R.id.nav_event_fragment)
+
+
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         auth = FirebaseAuth.getInstance()
+
+        fragmentManager?.beginTransaction()
+                ?.replace(R.id.frame_fragment_id, calendar_event())?.commit()
+        bt_UpcomingEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_profile_calendar_filled)!!)
+
+
+        bt_UpcomingEvents.setOnClickListener {
+
+            fragmentManager?.beginTransaction()
+                    ?.replace(R.id.frame_fragment_id, calendar_event())?.commit()
+            bt_UpcomingEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_profile_calendar_filled)!!)
+            bt_PassedEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_profile_archive)!!)
+            bt_FavouritesEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_favourite_event)!!)
+
+        }
+        bt_PassedEvents.setOnClickListener {
+            fragmentManager?.beginTransaction()?.replace(R.id.frame_fragment_id, last_event())?.commit()
+            bt_UpcomingEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_profile_calendar)!!)
+            bt_FavouritesEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_favourite_event)!!)
+            bt_PassedEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_profile_archive_filled)!!)
+        }
+
+        bt_FavouritesEvents.setOnClickListener(){
+            fragmentManager?.beginTransaction()
+                    ?.replace(R.id.frame_fragment_id, LikeEvent())?.commit()
+            bt_UpcomingEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_profile_calendar)!!)
+            bt_PassedEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_profile_archive)!!)
+            bt_FavouritesEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_favourite_event_filled)!!)
+        }
+
         getUserData()
         //nameId.text = "$firstname $lastname"
 
         // TODO: Use the ViewModel
     }
+
+
 
     @SuppressLint("SetTextI18n")
     private fun getUserData(){
@@ -88,5 +117,14 @@ class Profile : Fragment() {
         })
 
     }
+
+//    private fun likeClick() {
+//        bt_FavouritesEvents.setOnClickListener {
+//
+//            val fr = getFragmentManager()?.beginTransaction()
+//            fr?.replace(R.id.nav_event_fragment, last_event())
+//            fr?.commit()
+//        }
+//    }
 
 }

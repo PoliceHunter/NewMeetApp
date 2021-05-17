@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newmeetapp.R
+import com.example.newmeetapp.ui.profile.calendar_event
 
 class MyAdapter(private val eventList: ArrayList<Events>, private val onEventListener: OnEventListener) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 

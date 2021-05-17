@@ -167,6 +167,8 @@ class Creating : Fragment() {
                 currentUserDb.child("details").setValue(editText_eventDetails?.text.toString())
                 currentUserDb.child("id").setValue(currentUserDb.key.toString())
                 currentUserDb.child("admin").setValue(currentUser?.uid)
+//                val my_event = FirebaseDatabase.getInstance().getReference("my_event/${currentUser?.uid}")
+//                my_event.child(currentUserDb.key.toString()).setValue(true)
 
                 etPlace?.let { it1 ->
                     currentUserDb.child("place/name").setValue(it1.name)

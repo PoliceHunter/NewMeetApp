@@ -33,11 +33,6 @@ class MembersAdapter(private val userList: ArrayList<inRelative>,
 
     override fun getItemViewType(position: Int): Int {
        return R.layout.fragment_member_accept
-//        return if (visibility)
-//            R.layout.fragment_member
-//        else
-//            R.layout.fragment_member_accept
-
 
     }
 

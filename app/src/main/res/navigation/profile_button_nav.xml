@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile_button_nav"
+    app:startDestination="@+id/frag_calendar_event">
+
+    <fragment
+        android:id="@+id/frag_calendar_event"
+        android:name="com.example.newmeetapp.ui.profile.calendar_event"
+        tools:layout="@layout/fragment_calendar_event" />
+    <fragment
+        android:id="@+id/frag_last_event"
+        android:name="com.example.newmeetapp.ui.profile.last_event"
+        tools:layout="@layout/fragment_last_event" />
+    <fragment
+        android:id="@+id/frag_like_event"
+        android:name="com.example.newmeetapp.ui.profile.LikeEvent"
+        tools:layout="@layout/fragment_like_event" />
+
+
+
+</navigation>
