@@ -153,7 +153,7 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
                             Toast.makeText(this, "Вы подписались на событие!", Toast.LENGTH_SHORT)
                                     .show()
                             bt_go.setText("Отписаться")
-                            isWriteBool = null
+                            isWriteBool = false
                         }
                         false -> {
                             membersDb.child("${bundle.id}/$currentUser").removeValue()

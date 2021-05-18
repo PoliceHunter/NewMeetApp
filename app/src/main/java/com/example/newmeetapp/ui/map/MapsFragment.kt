@@ -52,6 +52,7 @@ class MapsFragment : Fragment() {
                     for (postSnapshot in snapshot.children) {
                         var markerMap : Marker? = null
                         val event = postSnapshot.getValue(Events::class.java)
+                        event?.getAdminData(event)
                         eventArrayList.add(event!!)
                         if (postSnapshot.child("place").exists()) {
 
@@ -97,7 +98,7 @@ class MapsFragment : Fragment() {
             }
 
             override fun onInfoWindowClick(marker: Marker) {
-               val eventArray = marker.tag as? Events
+                val eventArray = marker.tag as? Events
 
                 val intent = Intent(requireContext(), EventInfo::class.java)
                 intent.putExtra("event", eventArray)

@@ -9,6 +9,8 @@ import android.util.Patterns
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -20,7 +22,14 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        auth = FirebaseAuth.getInstance()
+        auth = Firebase.auth
+
+        val currentUser = auth.currentUser
+        if (currentUser != null){
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            finish()
+        }
+
         loginIn()
     }
 

@@ -1,17 +1,33 @@
 package com.example.newmeetapp.ui.profile
 
 import android.annotation.SuppressLint
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.example.newmeetapp.LoginActivity
+import com.example.newmeetapp.MainActivity
 import com.example.newmeetapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.profile_fragment.*
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.net.URL
 
 class Profile : Fragment() {
 
@@ -21,17 +37,19 @@ class Profile : Fragment() {
 
     lateinit var auth: FirebaseAuth
     private lateinit var viewModel: ProfileViewModel
-    private lateinit var databaseReference: DatabaseReference
-    private var firstname : String? = null
-    private var lastname : String? = null
-    private var city : String? = null
-    private var about : String? = null
-    private var birthday : String? = null
-    private var phone : String? = null
-    private var telegram : String? = null
-    private var instagram : String? = null
-    private var vk : String? = null
+    private var firstname: String? = null
+    private var lastname: String? = null
+    private var city: String? = null
+    private var about: String? = null
+    private var birthday: String? = null
+    private var phone: String? = null
+    private var telegram: String? = null
+    private var instagram: String? = null
+    private var vk: String? = null
     var database: FirebaseDatabase? = null
+
+    private lateinit var imageUri: Uri
+    private val REQUEST_IMAGE_CAPTURE = 100
 
 
     override fun onCreateView(
@@ -45,63 +63,141 @@ class Profile : Fragment() {
     @SuppressLint("SetTextI18n", "UseCompatLoadingForDrawables")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        //val nFragment = fragmentManager?.findFragmentById(R.id.nav_event_fragment)
 
 
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         auth = FirebaseAuth.getInstance()
 
         fragmentManager?.beginTransaction()
-                ?.replace(R.id.frame_fragment_id, calendar_event())?.commit()
+            ?.replace(R.id.frame_fragment_id, calendar_event())?.commit()
         bt_UpcomingEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_profile_calendar_filled)!!)
 
+
+//        val baos = ByteArrayOutputStream()
+//        val image = baos.toByteArray()
+        val imageStorageRef = FirebaseStorage.getInstance().getReference("photo/${auth.currentUser!!.uid}")
+
+        imageStorageRef.downloadUrl.addOnCompleteListener { photoUri ->
+            Glide.with(this@Profile)
+                .load(photoUri.result)
+                .into(OrgAvatarInfoId)
+        }
+
+//        imageStorageRef.getBytes(ONE_MEGABYTE).addOnCompleteListener {
+//
+//        }
+//        OrgAvatarInfoId.isDrawingCacheEnabled = true
+//        OrgAvatarInfoId.buildDrawingCache()
+
+//        val bitmap = (OrgAvatarInfoId.drawable as BitmapDrawable).bitmap
+//        val baos = ByteArrayOutputStream()
+
+        OrgAvatarInfoId.setOnClickListener {
+            takePictureIntent()
+        }
 
         bt_UpcomingEvents.setOnClickListener {
 
             fragmentManager?.beginTransaction()
-                    ?.replace(R.id.frame_fragment_id, calendar_event())?.commit()
+                ?.replace(R.id.frame_fragment_id, calendar_event())?.commit()
             bt_UpcomingEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_profile_calendar_filled)!!)
             bt_PassedEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_profile_archive)!!)
             bt_FavouritesEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_favourite_event)!!)
 
         }
         bt_PassedEvents.setOnClickListener {
-            fragmentManager?.beginTransaction()?.replace(R.id.frame_fragment_id, last_event())?.commit()
+            fragmentManager?.beginTransaction()?.replace(R.id.frame_fragment_id, last_event())
+                ?.commit()
             bt_UpcomingEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_profile_calendar)!!)
             bt_FavouritesEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_favourite_event)!!)
             bt_PassedEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_profile_archive_filled)!!)
         }
 
-        bt_FavouritesEvents.setOnClickListener(){
+        bt_FavouritesEvents.setOnClickListener() {
             fragmentManager?.beginTransaction()
-                    ?.replace(R.id.frame_fragment_id, LikeEvent())?.commit()
+                ?.replace(R.id.frame_fragment_id, LikeEvent())?.commit()
             bt_UpcomingEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_profile_calendar)!!)
             bt_PassedEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_profile_archive)!!)
             bt_FavouritesEvents.setBackgroundDrawable(resources.getDrawable(R.drawable.ic_favourite_event_filled)!!)
         }
 
-        getUserData()
-        //nameId.text = "$firstname $lastname"
+        buttonLogOut.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            startActivity(Intent(requireContext(), LoginActivity::class.java))
+        }
 
-        // TODO: Use the ViewModel
+        getUserData()
+        //TODO Разбить на части
+
+    }
+
+    private fun takePictureIntent() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { pictureIntent ->
+            pictureIntent.resolveActivity(activity?.packageManager!!)?.also {
+                startActivityForResult(pictureIntent, REQUEST_IMAGE_CAPTURE)
+            }
+        }
+    }
+
+    @SuppressLint("RestrictedApi")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+
+            uploadImageAndSaveUri(imageBitmap)
+        }
+
+    }
+
+    private fun uploadImageAndSaveUri(bitmap: Bitmap) {
+        val baos = ByteArrayOutputStream()
+        val storage = FirebaseStorage.getInstance()
+            .getReference("photo/${auth.currentUser!!.uid}")
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val image = baos.toByteArray()
+
+        val upload = storage.putBytes(image)
+
+
+        progress_bar_profileImage.visibility = View.VISIBLE
+        upload.addOnCompleteListener { uploadTask ->
+            progress_bar_profileImage.visibility = View.INVISIBLE
+
+            if (uploadTask.isSuccessful)
+            {
+                storage.downloadUrl.addOnCompleteListener { urlTask ->
+                    urlTask.result?.let{
+                        imageUri = it
+                        Toast.makeText(requireContext(), imageUri.toString(), Toast.LENGTH_SHORT).show()
+                        OrgAvatarInfoId.setImageBitmap(bitmap)
+                    }
+                }
+            }
+            else
+            {
+                uploadTask.exception?.let {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
     }
 
 
-
     @SuppressLint("SetTextI18n")
-    private fun getUserData(){
-        database = FirebaseDatabase.getInstance()
-        databaseReference = database?.reference!!.child("profile")
-        val currentUser = auth.currentUser
-        val currentUserDb = databaseReference.child(currentUser?.uid!!)
+    private fun getUserData() {
 
-        currentUserDb.addValueEventListener(object: ValueEventListener
-        {
-            override fun onDataChange(snapshot: DataSnapshot)
-            {
+        val currentUser = auth.currentUser
+        val currentUserDb =
+            FirebaseDatabase.getInstance().getReference("profile/${currentUser?.uid!!}")
+
+        currentUserDb.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
                 firstname = snapshot.child("firstname").value.toString()
                 lastname = snapshot.child("lastname").value.toString()
                 nameId.text = "$firstname $lastname"
+
                 CityId.text = snapshot.child("city").value.toString()
                 AboutId.text = snapshot.child("about").value.toString()
                 BirthDayId.text = snapshot.child("birthday").value.toString()
@@ -109,6 +205,8 @@ class Profile : Fragment() {
                 TelegramId.text = snapshot.child("telegram").value.toString()
                 InstagramId.text = snapshot.child("instagram").value?.toString()
                 VkId.text = snapshot.child("vk").value.toString()
+
+                //TODO Add to class user new params and read with one param
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -128,3 +226,4 @@ class Profile : Fragment() {
 //    }
 
 }
+

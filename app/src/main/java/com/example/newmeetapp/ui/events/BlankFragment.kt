@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newmeetapp.R
@@ -40,6 +41,8 @@ class BlankFragment : Fragment(), OnEventListener {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
     }
 
     override fun onCreateView(
@@ -48,12 +51,20 @@ class BlankFragment : Fragment(), OnEventListener {
     ): View? {
 
 
+
+
         return inflater.inflate(R.layout.event_list_fragment, container, false)
     }
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         mRecyclerView = activity?.findViewById(R.id.eventListId)!!
 
@@ -84,7 +95,7 @@ class BlankFragment : Fragment(), OnEventListener {
                     }
 
                     mRecyclerView.adapter = MyAdapter(eventArrayList, this@BlankFragment)
-                    databaseReference.removeEventListener(this)
+                            //databaseReference.removeEventListener(this)
                 }
             }
 
