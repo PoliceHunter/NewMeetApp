@@ -4,30 +4,27 @@ import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.newmeetapp.LoginActivity
-import com.example.newmeetapp.MainActivity
 import com.example.newmeetapp.R
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.profile_fragment.*
-import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
-import java.net.URL
 
 class Profile : Fragment() {
 
@@ -78,19 +75,11 @@ class Profile : Fragment() {
         val imageStorageRef = FirebaseStorage.getInstance().getReference("photo/${auth.currentUser!!.uid}")
 
         imageStorageRef.downloadUrl.addOnCompleteListener { photoUri ->
-            Glide.with(this@Profile)
-                .load(photoUri.result)
-                .into(OrgAvatarInfoId)
+            if (photoUri.isSuccessful)
+                Glide.with(this@Profile)
+                    .load(photoUri.result)
+                    .into(OrgAvatarInfoId)
         }
-
-//        imageStorageRef.getBytes(ONE_MEGABYTE).addOnCompleteListener {
-//
-//        }
-//        OrgAvatarInfoId.isDrawingCacheEnabled = true
-//        OrgAvatarInfoId.buildDrawingCache()
-
-//        val bitmap = (OrgAvatarInfoId.drawable as BitmapDrawable).bitmap
-//        val baos = ByteArrayOutputStream()
 
         OrgAvatarInfoId.setOnClickListener {
             takePictureIntent()
@@ -171,6 +160,7 @@ class Profile : Fragment() {
                         imageUri = it
                         Toast.makeText(requireContext(), imageUri.toString(), Toast.LENGTH_SHORT).show()
                         OrgAvatarInfoId.setImageBitmap(bitmap)
+                        FirebaseDatabase.getInstance().getReference("profile/${auth.currentUser!!.uid}/uri").setValue(imageUri.toString())
                     }
                 }
             }

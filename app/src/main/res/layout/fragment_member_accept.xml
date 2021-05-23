@@ -69,7 +69,12 @@
 
         </LinearLayout>
 
-
+        <ImageView
+            android:id="@+id/inEventPhotoMember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:srcCompat="@tools:sample/avatars" />
 
 
     </LinearLayout>

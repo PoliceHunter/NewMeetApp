@@ -19,6 +19,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.newmeetapp.R
 import com.example.newmeetapp.ui.events.*
 import com.example.newmeetapp.ui.manageevent.manageEvent
@@ -28,8 +29,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.creating_fragment.*
 import kotlinx.android.synthetic.main.event_info.*
+import kotlinx.android.synthetic.main.event_info.OrgAvatarInfoId
+import kotlinx.android.synthetic.main.profile_fragment.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -83,6 +87,14 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
                 "Образование" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.orange_category_study)!!)
                 "Посиделки" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.yellow_category_company)!!)
                 "Прочее" -> layoutCategoryEventInfoId.setBackgroundColor(resources?.getColor(R.color.pink_category_other)!!)
+            }
+
+            val imageStorageRef = FirebaseStorage.getInstance().getReference("photo/${admin}")
+            imageStorageRef.downloadUrl.addOnCompleteListener { photoUri ->
+                if (photoUri.isSuccessful)
+                    Glide.with(this)
+                            .load(photoUri.result)
+                            .into(OrgAvatarInfoId)
             }
             myFavoritsDb = FirebaseDatabase.getInstance().getReference("my_favorits")
             myFavoritsDb.child("$currentUser/${bundle.id}").get().addOnSuccessListener {

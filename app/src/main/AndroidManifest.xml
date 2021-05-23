@@ -17,11 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.newmeetapp"
         android:usesCleartextTraffic="true">
-
-
-        <activity android:name=".ui.profile.ProfileOtherUser"></activity>
-
-
+        <activity android:name=".ui.inviting.InvitingMembers"></activity>
+        <activity android:name=".ui.profile.ProfileOtherUser" />
         <activity android:name=".ui.eventInfo.EventInfo" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -36,15 +33,10 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".RegistrationActivity" />
-
-
         <activity android:name=".ui.manageevent.manageEvent" />
-
-
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustPan" />
-
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,8 +44,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
     </application>
 
 </manifest>

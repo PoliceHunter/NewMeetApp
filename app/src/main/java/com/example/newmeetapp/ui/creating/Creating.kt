@@ -1,6 +1,7 @@
 package com.example.newmeetapp.ui.creating
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -12,9 +13,8 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.newmeetapp.R
-import com.example.newmeetapp.ui.inviting.InvitingFragment
+import com.example.newmeetapp.ui.inviting.InvitingMembers
 import com.google.android.gms.common.api.Status
-import com.google.android.gms.maps.GoogleMap
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
@@ -25,7 +25,6 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.creating_fragment.*
 import java.util.*
-import kotlin.random.Random
 
 class Creating : Fragment() {
 
@@ -37,8 +36,8 @@ class Creating : Fragment() {
     var radioSex: RadioButton? = null
     var etEventName : EditText? = null
     var radioCategory : RadioButton? = null
-    private lateinit var etUnicalID : UUID
     val MIN_LENTH_NAME = 3
+    private var eventID: String? = null
 
     companion object {
         fun newInstance() = Creating()
@@ -154,21 +153,20 @@ class Creating : Fragment() {
             if (validation()) {
 
                 val currentUserDb = databaseReference.push()
+                eventID = currentUserDb.key.toString()
                 currentUserDb.child("name").setValue(etEventName?.text.toString())
                 currentUserDb.child("time").setValue(radioTime?.text.toString())
                 currentUserDb.child("gender").setValue(radioSex?.text.toString())
                 currentUserDb.child("date").setValue(eventDate?.text.toString())
                 currentUserDb.child("category").setValue(radioCategory?.text.toString())
-//                if (textInputEditTextEventParticipantsCount.text!!.isEmpty()) {
-//                    currentUserDb.child("count_participants").setValue("-1")
-//                }
-//                else
-                    currentUserDb.child("count_participants").setValue(textInputEditTextEventParticipantsCount.text.toString())
+                currentUserDb.child("count_participants").setValue(textInputEditTextEventParticipantsCount.text.toString())
                 currentUserDb.child("details").setValue(editText_eventDetails?.text.toString())
                 currentUserDb.child("id").setValue(currentUserDb.key.toString())
                 currentUserDb.child("admin").setValue(currentUser?.uid)
-//                val my_event = FirebaseDatabase.getInstance().getReference("my_event/${currentUser?.uid}")
-//                my_event.child(currentUserDb.key.toString()).setValue(true)
+
+                // Устанавливаем в бд ключ события чтобы понимать кто админ
+                val my_admin = FirebaseDatabase.getInstance().getReference("my_admin/${currentUser?.uid}")
+                my_admin.child(currentUserDb.key.toString()).setValue(true)
 
                 etPlace?.let { it1 ->
                     currentUserDb.child("place/name").setValue(it1.name)
@@ -177,7 +175,7 @@ class Creating : Fragment() {
                     currentUserDb.child("place/address").setValue(it1.address.toString())}
 
             }
-            //goToInvitations(it)
+            goToInvitations(it)
         }
     }
 
@@ -227,7 +225,10 @@ class Creating : Fragment() {
     fun goToInvitations (view: View) {
         val btNext = view.findViewById<Button>(R.id.bt_next)
         btNext.setOnClickListener {
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, InvitingFragment()).addToBackStack(null).commit()
+            val nextPage = Intent(requireContext(), InvitingMembers::class.java)
+            nextPage.putExtra("event_id", eventID)
+            startActivity(nextPage)
+
             }
     }
 

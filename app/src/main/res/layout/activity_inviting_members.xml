@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutЗParticipantsSearch"
@@ -20,9 +21,12 @@
             android:hint="Поиск...(по участникам)" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <ListView
-        android:id="@+id/listViewInviting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+     <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/invitingRecycle"
+    android:name="com.example.newmeetapp.BlankFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layoutManager="LinearLayoutManager"
+    tools:context=".ui.events.BlankFragment"
+    tools:listitem="@layout/inviting_member" />
 </LinearLayout>
