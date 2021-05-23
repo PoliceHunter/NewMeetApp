@@ -57,12 +57,7 @@ class MembersAdapter(private val userList: ArrayList<inRelative>,
 //                notifyItemRemoved(holder.getAdapterPosition())
 //            }
 //        }
-        if (currentItem.User.uri != null)
-        {
-            Glide.with(holder.dPhoto)
-                    .load(currentItem.User.uri)
-                    .into(holder.dPhoto)
-        }
+
         holder.dBtDeni.setOnClickListener {
             onMemberListener.onDeleteMember(position)
             notifyItemRemoved(position)
