@@ -42,9 +42,9 @@
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="53dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginStart="20dp"
-            android:background="@android:drawable/radiobutton_off_background"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/radio_normal"
             android:visibility="visible" />
 
 

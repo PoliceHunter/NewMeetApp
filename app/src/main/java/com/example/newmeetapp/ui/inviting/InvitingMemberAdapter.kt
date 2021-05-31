@@ -79,7 +79,7 @@ class InvitingMemberAdapter(private val usersList: ArrayList<user>,
             if (!getSelected())
             {
                 setSelected(true)
-                holder.dInvite.setBackgroundResource(android.R.drawable.radiobutton_on_background)
+                holder.dInvite.setBackgroundResource(R.drawable.radio_normal)
                 membersDb.child("$eventId/${currentItem.id}").setValue("true")
                 my_eventDb.child("${currentItem.id}/$eventId").setValue(true)
                 notifcDb.child("${currentItem.id}/$eventId").setValue(auth.currentUser!!.uid)
@@ -87,7 +87,7 @@ class InvitingMemberAdapter(private val usersList: ArrayList<user>,
             else
             {
                 setSelected(false)
-                holder.dInvite.setBackgroundResource(android.R.drawable.radiobutton_off_background)
+                holder.dInvite.setBackgroundResource(R.drawable.radio_selected)
                 membersDb.child("$eventId/${currentItem.id}").removeValue()
                 my_eventDb.child("${currentItem.id}/$eventId").removeValue()
                 notifcDb.child("${currentItem.id}/$eventId").removeValue()
