@@ -65,7 +65,6 @@ class MapsFragment : Fragment() {
                                         .icon(BitmapDescriptorFactory.defaultMarker(getColorMarker(event.category)))
                                         .position(etPlaceLatLng)
                                         .title(nameMarker)
-
                             )
                         }
                         if (markerMap != null) {
@@ -96,7 +95,6 @@ class MapsFragment : Fragment() {
 
                 return false
             }
-
             override fun onInfoWindowClick(marker: Marker) {
                 val eventArray = marker.tag as? Events
 

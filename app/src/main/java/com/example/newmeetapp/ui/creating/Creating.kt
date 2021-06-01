@@ -163,8 +163,6 @@ class Creating : Fragment() {
                 currentUserDb.child("details").setValue(editText_eventDetails?.text.toString())
                 currentUserDb.child("id").setValue(currentUserDb.key.toString())
                 currentUserDb.child("admin").setValue(currentUser?.uid)
-
-                // Устанавливаем в бд ключ события чтобы понимать кто админ
                 val my_admin = FirebaseDatabase.getInstance().getReference("my_admin/${currentUser?.uid}")
                 my_admin.child(currentUserDb.key.toString()).setValue(true)
 
@@ -173,7 +171,6 @@ class Creating : Fragment() {
                     currentUserDb.child("place/id").setValue(it1.id)
                     currentUserDb.child("place/LatLng").setValue(it1.latLng)
                     currentUserDb.child("place/address").setValue(it1.address.toString())}
-
             }
             goToInvitations(it)
         }

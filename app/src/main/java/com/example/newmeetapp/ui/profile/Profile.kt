@@ -195,8 +195,6 @@ class Profile : Fragment() {
                 TelegramId.text = snapshot.child("telegram").value.toString()
                 InstagramId.text = snapshot.child("instagram").value?.toString()
                 VkId.text = snapshot.child("vk").value.toString()
-
-                //TODO Add to class user new params and read with one param
             }
 
             override fun onCancelled(error: DatabaseError) {

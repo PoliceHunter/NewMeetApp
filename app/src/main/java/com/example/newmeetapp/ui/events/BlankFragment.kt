@@ -65,14 +65,11 @@ class BlankFragment : Fragment(), OnEventListener {
 
     override fun onResume() {
         super.onResume()
-
         mRecyclerView = activity?.findViewById(R.id.eventListId)!!
-
         mRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         mRecyclerView.setHasFixedSize(true)
         eventArrayList = arrayListOf<Events>()
         getEventsData()
-
     }
 
      fun getEventsData()
@@ -80,9 +77,7 @@ class BlankFragment : Fragment(), OnEventListener {
         databaseReference = FirebaseDatabase.getInstance().getReference("events")
         etValueEventListener = databaseReference.addValueEventListener(object : ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
-
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     var event : Events? = null
@@ -90,33 +85,13 @@ class BlankFragment : Fragment(), OnEventListener {
                     {
                         event = eventSnapshot.getValue(Events::class.java)!!
 
-                        getAdminData(event)
+                        event.getAdminData(event)
                         eventArrayList.add(event)
                     }
-
                     mRecyclerView.adapter = MyAdapter(eventArrayList, this@BlankFragment)
-                            //databaseReference.removeEventListener(this)
                 }
             }
 
-        })
-    }
-
-
-    fun getAdminData(event: Events)
-     {
-         database = FirebaseDatabase.getInstance()
-         profileReference = database?.reference!!.child("profile/${event.admin}")
-
-         profileReference.addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val info = snapshot.getValue(user::class.java)
-                event.adminInfo = info
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
         })
     }
 

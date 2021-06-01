@@ -37,6 +37,7 @@ import kotlinx.android.synthetic.main.profile_fragment.*
 import java.util.*
 import kotlin.collections.ArrayList
 
+@Suppress("DEPRECATION")
 class EventInfo : AppCompatActivity(), OnMemberListener {
 
     lateinit var auth: FirebaseAuth
@@ -96,7 +97,7 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
                             .load(photoUri.result)
                             .into(OrgAvatarInfoId)
             }
-            myFavoritsDb = FirebaseDatabase.getInstance().getReference("my_favorits")
+            myFavoritsDb = FirebaseDatabase.getInstance().getReference("my_favourites")
             myFavoritsDb.child("$currentUser/${bundle.id}").get().addOnSuccessListener {
                 btLikeClick = it.exists()
                 if (!btLikeClick)
@@ -107,7 +108,6 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
 
             bt_FavouriteEvent.setOnClickListener {
                 if (!btLikeClick) {
-
                     bt_FavouriteEvent.setBackgroundDrawable(resources?.getDrawable(R.drawable.ic_favourite_event_filled)!!)
                     myFavoritsDb.child("$currentUser/${bundle.id}").setValue(false)
                     Toast.makeText(this, "Событие добавлено в избранное", Toast.LENGTH_SHORT)
@@ -119,9 +119,7 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
                     Toast.makeText(this, "Событие удалено из избранного", Toast.LENGTH_SHORT)
                             .show()
                     btLikeClick = false
-
                 }
-
             }
 
             if (currentUser == bundle.admin)
@@ -139,17 +137,17 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
                 membersDb = FirebaseDatabase.getInstance().getReference("members")
                 my_eventDb = FirebaseDatabase.getInstance().getReference("my_event")
                 var isWriteBool : Boolean? = null
-                bt_go.setText("Откликнуться")
+                bt_go.text = "Откликнуться"
                 membersDb.child("${bundle.id}/$currentUser").get().addOnSuccessListener {
                     if (it.value == "true")
                     {
                         isWriteBool = true
-                        bt_go.setText("Отписаться")
+                        bt_go.text = "Отписаться"
                     }
                     if (it.value == "false")
                     {
                         isWriteBool = false
-                        bt_go.setText("Отписаться")
+                        bt_go.text = "Отписаться"
                     }
                     Log.i("firebase", "Got value ${it.value}")
 
@@ -164,7 +162,7 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
                             my_eventDb.child("$currentUser/${bundle.id}").setValue(false)
                             Toast.makeText(this, "Вы подписались на событие!", Toast.LENGTH_SHORT)
                                     .show()
-                            bt_go.setText("Отписаться")
+                            bt_go.text = "Отписаться"
                             isWriteBool = false
                         }
                         false -> {
@@ -172,7 +170,7 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
                             my_eventDb.child("$currentUser/${bundle.id}").removeValue()
                             Toast.makeText(this, "Вы отписались от события!", Toast.LENGTH_SHORT)
                                     .show()
-                            bt_go.setText("Откликнуться")
+                            bt_go.text = "Откликнуться"
                             isWriteBool = null
                         }
                         true ->{
@@ -180,7 +178,7 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
                             my_eventDb.child("$currentUser/${bundle.id}").removeValue()
                             Toast.makeText(this, "Вы отписались от события!", Toast.LENGTH_SHORT)
                                     .show()
-                            bt_go.setText("Откликнуться")
+                            bt_go.text = "Откликнуться"
                             isWriteBool = null
                         }
                     }
@@ -229,9 +227,6 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
         val membersDb = FirebaseDatabase.getInstance().getReference("${participantsForAdminToRelative[position].User.id}/" +
                 participantsForAdminToRelative[position].idEvent)
         membersDb.removeValue()
-        //participantsForAdminToRelative.removeAt(position)
-
-        //updateMembers(participantsForAdminToRelative)
     }
 
     override fun onAcceptMember(position: Int){
@@ -244,8 +239,6 @@ class EventInfo : AppCompatActivity(), OnMemberListener {
             .getReference("my_event/${participantsForAdminToRelative[position].User.id}/" +
                 participantsForAdminToRelative[position].idEvent)
         membersDb.setValue(true)
-      //  participantsForAdminToRelative[position].value = true
-        //updateMembers(participantsForAdminToRelative)
     }
 
     override fun onMemberClick(position: Int) {
