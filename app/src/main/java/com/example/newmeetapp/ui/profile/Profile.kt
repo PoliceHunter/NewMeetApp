@@ -121,7 +121,12 @@ class Profile : Fragment() {
     }
 
     private fun takePictureIntent() {
-        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { pictureIntent ->
+//        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { pictureIntent ->
+//            pictureIntent.resolveActivity(activity?.packageManager!!)?.also {
+//                startActivityForResult(pictureIntent, REQUEST_IMAGE_CAPTURE)
+//            }
+//        }
+        Intent(Intent.ACTION_PICK).also { pictureIntent ->
             pictureIntent.resolveActivity(activity?.packageManager!!)?.also {
                 startActivityForResult(pictureIntent, REQUEST_IMAGE_CAPTURE)
             }
@@ -133,7 +138,6 @@ class Profile : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
-
             uploadImageAndSaveUri(imageBitmap)
         }
 
@@ -187,7 +191,6 @@ class Profile : Fragment() {
                 firstname = snapshot.child("firstname").value.toString()
                 lastname = snapshot.child("lastname").value.toString()
                 nameId.text = "$firstname $lastname"
-
                 CityId.text = snapshot.child("city").value.toString()
                 AboutId.text = snapshot.child("about").value.toString()
                 BirthDayId.text = snapshot.child("birthday").value.toString()
