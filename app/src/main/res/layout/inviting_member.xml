@@ -23,7 +23,7 @@
             android:shape="ring"
             app:cardCornerRadius="40dp"
             android:layout_marginStart="10dp"
-            android:layout_gravity="center"
+            android:layout_gravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -40,8 +40,8 @@
             android:layout_width="150dp"
             android:layout_height="47dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="6dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="65dp"
             android:gravity="center_vertical"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textSize="16sp"
@@ -55,12 +55,12 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/InviteButton"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="53dp"
-            android:gravity="center_vertical"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/radio_normal"
+            android:gravity="center_vertical"
             android:visibility="visible" />
 
 

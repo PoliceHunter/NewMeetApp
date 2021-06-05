@@ -34,6 +34,8 @@
 
                 <TextView
                     android:id="@+id/whoInvite_Text"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginStart="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -42,9 +44,9 @@
                 <TextView
                     android:id="@+id/eventName_in_list"
                     android:layout_width="280dp"
-                    android:layout_height="41dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
                     android:layout_marginEnd="6dp"
                     android:textAppearance="?attr/textAppearanceListItem"
                     android:textSize="16sp"
@@ -59,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="2dp"
                 android:paddingHorizontal="4dp"
                 android:paddingVertical="4dp"
                 android:background="@drawable/white_with_grey_stroke"
@@ -97,8 +99,9 @@
             android:id="@+id/eventCategory_ImageId"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginStart="6dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/layout_eventFirstRow_inList" />
