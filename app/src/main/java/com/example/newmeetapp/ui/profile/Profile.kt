@@ -2,8 +2,11 @@ package com.example.newmeetapp.ui.profile
 
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
+import android.content.ContentResolver
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -25,6 +28,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.profile_fragment.*
 import java.io.ByteArrayOutputStream
+import java.io.IOException
 
 class Profile : Fragment() {
 
@@ -47,6 +51,7 @@ class Profile : Fragment() {
 
     private lateinit var imageUri: Uri
     private val REQUEST_IMAGE_CAPTURE = 100
+    private val TAKEPICTURE = 120
 
 
     override fun onCreateView(
@@ -126,11 +131,9 @@ class Profile : Fragment() {
 //                startActivityForResult(pictureIntent, REQUEST_IMAGE_CAPTURE)
 //            }
 //        }
-        Intent(Intent.ACTION_PICK).also { pictureIntent ->
-            pictureIntent.resolveActivity(activity?.packageManager!!)?.also {
-                startActivityForResult(pictureIntent, REQUEST_IMAGE_CAPTURE)
-            }
-        }
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "image/*"
+        startActivityForResult(Intent.createChooser(intent, "Select image"), TAKEPICTURE)
     }
 
     @SuppressLint("RestrictedApi")
@@ -139,6 +142,16 @@ class Profile : Fragment() {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             uploadImageAndSaveUri(imageBitmap)
+        }
+        if (requestCode == TAKEPICTURE)
+        {
+            val filePath = data?.data
+            try {
+                val bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, filePath)
+                uploadImageAndSaveUri(bitmap)
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
 
     }
